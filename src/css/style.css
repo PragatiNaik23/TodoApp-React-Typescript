@@ -1,0 +1,18 @@
+#loginHeader{
+    background-color: #28a745;
+}
+
+.login{
+    margin-top:20vh;
+}
+
+.alert-box{
+    margin: auto;
+    border: red  1px;
+    border-style: solid;
+    background-color:#ff726f;
+    border-radius: 3%;
+    width: 40%;
+    background-position-x: center;
+    text-align: center;
+}
