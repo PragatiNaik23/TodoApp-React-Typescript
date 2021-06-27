@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import './App.css';
-import Login from './login/login'
-import Signup from './signup/signup';
-import CreateTask from './createTask/createTask';
+import Login from './components/login/login'
+import Signup from './components/signup/signup';
+import CreateTask from './components/createTask/createTask';
 
 const App: FC = () => {
   return (

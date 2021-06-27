@@ -1,6 +1,6 @@
 import  { ChangeEvent, FC, useState} from 'react';
-import "../css/style.css";
-import axiosInstance from '../axios';
+import "../../css/style.css";
+import axiosInstance from '../../axios';
 
 let userList: Array<any>
 let usernameList: any = []
