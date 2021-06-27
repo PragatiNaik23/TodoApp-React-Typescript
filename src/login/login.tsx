@@ -28,6 +28,9 @@ const Login: FC = () => {
         await axiosInstance.get(`/users/${loginData.username}.json`)
         .then(response => {
             userList = response.data
+            setLoginFailed({
+                failed: false
+            })
             // console.log(userList)
         })
         .catch(error => {
@@ -35,11 +38,23 @@ const Login: FC = () => {
             setLoginFailed({
                 failed: true
             })
+
+            setUsernameExist({
+                exist: true
+            })
+
+            setPassword({
+                correct: true
+            })
         })
 
         if(userList === null){
             setUsernameExist({
                 exist: false
+            })
+
+            setPassword({
+                correct: true
             })
         }
         else{
@@ -53,6 +68,9 @@ const Login: FC = () => {
     const auth = () => {
         for(let details in userList){
             if(userList[details].password === loginData.password){
+                setPassword({
+                    correct: true
+                })
                 console.log("Go to Task Listing Page")
             }
             else{
