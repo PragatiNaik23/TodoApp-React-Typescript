@@ -1,5 +1,6 @@
 import { FC } from "react";
 import logo from '../../images/logo.png'
+import '../../css/header.css'
 
 const Header: FC = () => {
     return(
@@ -12,7 +13,7 @@ const Header: FC = () => {
                         <button type="submit"  id="signup"  className="btn btn-primary btn-lg ml-lg-5">Sign Up</button>
                         <button type="submit"  id="createTask"  className="btn btn-primary btn-lg ml-lg-5">Create Task</button>
                         <button type="submit"  id="taskList" className="btn btn-primary btn-lg ml-lg-5">Task List</button>
-                        <button type="submit"  id="login"  className="btn btn-primary btn-lg ">Login</button>
+                        <button type="submit"  id="login"  className="btn btn-primary btn-lg ml-lg-5">Login</button>
                         <button type="submit"  id="logout"  className="btn btn-primary btn-lg ">Logout</button>
                     </li> 
                 </ul> 
