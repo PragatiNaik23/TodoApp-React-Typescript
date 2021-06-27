@@ -7,7 +7,7 @@ import CreateTask from './createTask/createTask';
 const App: FC = () => {
   return (
     <div className="App">
-      <Login></Login>
+      <Signup></Signup>
     </div>
   );
 }
