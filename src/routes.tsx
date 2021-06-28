@@ -6,7 +6,7 @@ import Signup from './components/signup/signup'
 const AppRouter: FC = () => {
     return(
         <Router>
-            <Route path='/' exact component={Login}/>
+            <Route path='/login' exact component={Login}/>
             <Route path='/signUp' component={Signup}/>
         </Router>
     );
