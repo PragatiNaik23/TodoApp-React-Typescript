@@ -2,58 +2,91 @@ import { FC } from "react";
 import '../../css/style.css'
 
 interface ParentCompProps {
-    // id: React.ReactNode;
-    // title:React.ReactNode;
-    // description: React.ReactNode;
-    // type: React.ReactNode;
-    // priority: React.ReactNode;
-    // dueDate: React.ReactNode;
-    // createdDate: React.ReactNode;
-    // comments: React.ReactNode;
-    // status: React.ReactNode;
-    task:React.ReactNode;
+    title:React.ReactNode;
+    dueDate: React.ReactNode;
+    status: React.ReactNode;
+    description: React.ReactNode;
+    type: React.ReactNode;
+    priority: React.ReactNode;
+    createdDate: React.ReactNode;
+    comments: React.ReactNode;
 }
 
-const Card: FC<ParentCompProps> = (props) => {
+let Sclasses : string, Pclasses: string, Tclasses: string
+
+const Card: FC<ParentCompProps> = ({title, dueDate, status,description, type, priority, createdDate, comments}) => {
+
+    if(status === "New"){
+        Sclasses = "text-danger text-center"
+    } else if(status === "In-Progress"){
+        Sclasses = "text-warning text-center"
+    } else{
+        Sclasses = "text-primary text-center"
+    }
+
+    if(priority === "Low"){
+        Pclasses = "text-primary"
+    } else if(priority === "Medium"){
+        Pclasses = "text-warning" 
+    } else{
+        Pclasses = "text-danger"
+    }
+
+    if(type === "Personal"){
+        Tclasses = "text-primary"
+    } else if(type === "Work"){
+        Tclasses = "text-danger"
+    } else{
+        Tclasses = "text-warning"
+    }
+
    return(
     <div className="card mt-3">
         <div className="card-header bg-dark text-white d-flex justify-content-around">
             <div className="text-white">
-            {props.task}
+                {title}
             </div>
             <div className="text-danger">
-                Due Date
+               {dueDate}
             </div>
         </div>
         <div className="card-body text-left">
-            <div className="text-center">
-                Status
+            <div className={Sclasses}>
+                <b>{status}</b>
             </div>
-            <div>
-            Description:
+            <div className="mt-1">
+            Description:{description}
             </div>
             <div className="row justify-content-between mt-1">
-                <div className="ml-3">
-                Type:
+                <div className="col">
+                    <div className="row">
+                        <div className="ml-3">
+                            Type:
+                        </div>
+                        <div className={Tclasses}> 
+                            {type}
+                        </div>
+                    </div> 
                 </div>
-                <div className="text-primary mr-auto"> 
-                    type Data
-                </div>
-                <div>
-                    Priority:
-                </div>
-                <div className="mr-1">
-                    priority data
+                <div className="col">
+                    <div className="row">
+                        <div>
+                            Priority:
+                        </div>
+                        <div className={Pclasses}>
+                            {priority}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="col">
                 <div className="row d-flex justify-content-start mt-1">
-                    Created Date:
+                    Created Date:{createdDate}
                 </div>
                 <div className="row d-flex justify-content-start mt-1">
-                    Comments:
+                    Comments:{comments}
                 </div>
-                <button className="editbtn btn btn-danger mt-2 col-md-4 text-center">Edit</button>
+                <button className="editbtn btn btn-danger mt-3 col-md-4 text-center">Edit</button>
             </div>
         </div>
     </div>

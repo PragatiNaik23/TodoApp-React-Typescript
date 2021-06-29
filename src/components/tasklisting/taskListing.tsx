@@ -165,7 +165,16 @@ const TaskListing: FC = () => {
                                         const options = [];
                                         for (let i = 0 ; i< statusTaskLen.newLen; i++) {
                                             options.push(<div>
-                                                <Card task = {newTask[i].title}></Card>
+                                                <Card 
+                                                    title = {newTask[i].title}
+                                                    dueDate = {newTask[i].dueDate}
+                                                    status = {newTask[i].status}
+                                                    description = {newTask[i].description}
+                                                    type = {newTask[i].type}
+                                                    priority = {newTask[i].priority}
+                                                    createdDate = {newTask[i].createdDate}
+                                                    comments = {newTask[i].comments}
+                                                ></Card>
                                             </div>);
                                         }
                                         return options;
@@ -176,7 +185,16 @@ const TaskListing: FC = () => {
                                     const options = [];
                                     for (let i = 0 ; i< statusTaskLen.inProgressLen; i++) {
                                         options.push(<div>
-                                            <Card task = {inProgressTask[i].title}></Card>
+                                             <Card 
+                                                    title = {inProgressTask[i].title}
+                                                    dueDate = {inProgressTask[i].dueDate}
+                                                    status = {inProgressTask[i].status}
+                                                    description = {inProgressTask[i].description}
+                                                    type = {inProgressTask[i].type}
+                                                    priority = {inProgressTask[i].priority}
+                                                    createdDate = {inProgressTask[i].createdDate}
+                                                    comments = {inProgressTask[i].comments}
+                                                ></Card>
                                         </div>);
                                     }
                                     return options;
@@ -187,7 +205,16 @@ const TaskListing: FC = () => {
                                     const options = [];
                                     for (let i = 0 ; i< statusTaskLen.completedLen; i++) {
                                         options.push(<div>
-                                            <Card task = {completedtask[i].title}></Card>
+                                            <Card 
+                                                    title = {completedtask[i].title}
+                                                    dueDate = {completedtask[i].dueDate}
+                                                    status = {completedtask[i].status}
+                                                    description = {completedtask[i].description}
+                                                    type = {completedtask[i].type}
+                                                    priority = {completedtask[i].priority}
+                                                    createdDate = {completedtask[i].createdDate}
+                                                    comments = {completedtask[i].comments}
+                                                ></Card>
                                         </div>);
                                     }
                                     return options;
@@ -211,7 +238,16 @@ const TaskListing: FC = () => {
                                     const options = [];
                                     for (let i = 0 ; i< lowTask.length; i++) {
                                         options.push(<div>
-                                            <Card task = {lowTask[i].title}></Card>
+                                            <Card 
+                                                    title = {lowTask[i].title}
+                                                    dueDate = {lowTask[i].dueDate}
+                                                    status = {lowTask[i].status}
+                                                    description = {lowTask[i].description}
+                                                    type = {lowTask[i].type}
+                                                    priority = {lowTask[i].priority}
+                                                    createdDate = {lowTask[i].createdDate}
+                                                    comments = {lowTask[i].comments}
+                                                ></Card>
                                         </div>);
                                     }
                                     return options;
@@ -222,7 +258,16 @@ const TaskListing: FC = () => {
                                     const options = [];
                                     for (let i = 0 ; i< mediumTask.length; i++) {
                                         options.push(<div>
-                                            <Card task = {mediumTask[i].title}></Card>
+                                            <Card 
+                                                    title = {mediumTask[i].title}
+                                                    dueDate = {mediumTask[i].dueDate}
+                                                    status = {mediumTask[i].status}
+                                                    description = {mediumTask[i].description}
+                                                    type = {mediumTask[i].type}
+                                                    priority = {mediumTask[i].priority}
+                                                    createdDate = {mediumTask[i].createdDate}
+                                                    comments = {mediumTask[i].comments}
+                                                ></Card>
                                         </div>);
                                     }
                                     return options;
@@ -233,7 +278,16 @@ const TaskListing: FC = () => {
                                     const options = [];
                                     for (let i = 0 ; i< highTask.length; i++) {
                                         options.push(<div>
-                                            <Card task = {highTask[i].title}></Card>
+                                            <Card 
+                                                    title = {highTask[i].title}
+                                                    dueDate = {highTask[i].dueDate}
+                                                    status = {highTask[i].status}
+                                                    description = {highTask[i].description}
+                                                    type = {highTask[i].type}
+                                                    priority = {highTask[i].priority}
+                                                    createdDate = {highTask[i].createdDate}
+                                                    comments = {highTask[i].comments}
+                                                ></Card>
                                         </div>);
                                     }
                                     return options;
@@ -257,7 +311,16 @@ const TaskListing: FC = () => {
                                     const options = [];
                                     for (let i = 0 ; i< personalTask.length; i++) {
                                         options.push(<div>
-                                            <Card task = {personalTask[i].title}></Card>
+                                            <Card 
+                                                    title = {personalTask[i].title}
+                                                    dueDate = {personalTask[i].dueDate}
+                                                    status = {personalTask[i].status}
+                                                    description = {personalTask[i].description}
+                                                    type = {personalTask[i].type}
+                                                    priority = {personalTask[i].priority}
+                                                    createdDate = {personalTask[i].createdDate}
+                                                    comments = {personalTask[i].comments}
+                                                ></Card>
                                         </div>);
                                     }
                                     return options;
@@ -268,7 +331,16 @@ const TaskListing: FC = () => {
                                     const options = [];
                                     for (let i = 0 ; i< workTask.length; i++) {
                                         options.push(<div>
-                                            <Card task = {workTask[i].title}></Card>
+                                            <Card 
+                                                    title = {workTask[i].title}
+                                                    dueDate = {workTask[i].dueDate}
+                                                    status = {workTask[i].status}
+                                                    description = {workTask[i].description}
+                                                    type = {workTask[i].type}
+                                                    priority = {workTask[i].priority}
+                                                    createdDate = {workTask[i].createdDate}
+                                                    comments = {workTask[i].comments}
+                                                ></Card>
                                         </div>);
                                     }
                                     return options;
@@ -279,7 +351,16 @@ const TaskListing: FC = () => {
                                     const options = [];
                                     for (let i = 0 ; i< miscellaneousTask.length; i++) {
                                         options.push(<div>
-                                            <Card task = {miscellaneousTask[i].title}></Card>
+                                            <Card 
+                                                    title = {miscellaneousTask[i].title}
+                                                    dueDate = {miscellaneousTask[i].dueDate}
+                                                    status = {miscellaneousTask[i].status}
+                                                    description = {miscellaneousTask[i].description}
+                                                    type = {miscellaneousTask[i].type}
+                                                    priority = {miscellaneousTask[i].priority}
+                                                    createdDate = {miscellaneousTask[i].createdDate}
+                                                    comments = {miscellaneousTask[i].comments}
+                                                ></Card>
                                         </div>);
                                     }
                                     return options;
