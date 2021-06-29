@@ -16,3 +16,12 @@
     background-position-x: center;
     text-align: center;
 }
+
+.tick{
+    width: 53px;
+    height: 50px;
+}
+
+.editbtn{
+    left: 30%;
+}

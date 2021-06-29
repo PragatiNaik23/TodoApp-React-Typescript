@@ -1,12 +1,8 @@
 import { FC, useState } from "react";
 import logo from '../../images/logo.png'
 import '../../css/header.css'
-import {createBrowserHistory} from 'history';
 import Login from '../login/login';
 import Signup from '../signup/signup';
-
-export const history = createBrowserHistory();
-
 
 const Header: FC = () => {
 
@@ -37,7 +33,10 @@ const Header: FC = () => {
                         <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={signupPage} >Sign Up</button>
                     </li>): (
                     <li className="navbar-nav ml-auto">
-                        <button type="submit"  id="login"  className="btn btn-primary btn-lg ml-lg-5" onClick={loginPage}>Login</button>
+                        <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={loginPage}>Login</button>
+                        <button type="submit"  id="logout"  className="btn btn-primary btn-lg ">Logout</button>
+                        <button type="submit"  id="createTask"  className="btn btn-primary btn-lg ml-lg-5">Create Task</button>
+                        <button type="submit"  id="taskList" className="btn btn-primary btn-lg ml-lg-5">Task List</button>
                     </li>)}
                 </ul> 
             </div>

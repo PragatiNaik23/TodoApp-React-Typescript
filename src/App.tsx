@@ -1,14 +1,13 @@
 import { FC } from 'react';
 import './App.css';
-import Login from './components/login/login'
-import Signup from './components/signup/signup';
-import CreateTask from './components/createTask/createTask';
-import Header from './components/header/header'
+import Header from './components/header/header';
+import TaskListing from './components/tasklisting/taskListing';
 
 const App: FC = () => {
   return (
     <div className="App">
-      <Header></Header>
+      {/* <Header></Header> */}
+      <TaskListing></TaskListing>
     </div>
   );
 }
