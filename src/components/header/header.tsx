@@ -10,6 +10,15 @@ interface ParentCompProps {
 }
 
 const Header: FC<ParentCompProps> = ({comp}) => {
+
+    const logout = (e: React.SyntheticEvent) => {
+        e.preventDefault()
+        history.push('/')
+        console.log("Before",window.localStorage.getItem('username'))
+        localStorage.clear()
+        console.log("After",window.localStorage.getItem('username'))
+    }
+
     return(
         <div>
             <nav className="navbar navbar-default navbar-fixed-top ">
@@ -38,7 +47,7 @@ const Header: FC<ParentCompProps> = ({comp}) => {
                             options= []
                             options.push(
                                 <li className="navbar-nav ml-auto">
-                                    <button type="submit" className="btn btn-primary btn-lg ml-lg-5">Logout</button>
+                                    <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={logout}>Logout</button>
                                     <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={() => {history.push('/create')}}>Create Task</button>
                                 </li>
                             )
@@ -47,7 +56,7 @@ const Header: FC<ParentCompProps> = ({comp}) => {
                             options= []
                             options.push(
                                 <li className="navbar-nav ml-auto">
-                                    <button type="submit" className="btn btn-primary btn-lg ml-lg-5">Logout</button>
+                                    <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={logout}>Logout</button>
                                     <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={() => {history.push('/listing')}}>Tasks</button>
                                 </li>
                             )
