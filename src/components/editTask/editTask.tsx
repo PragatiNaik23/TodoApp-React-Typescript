@@ -21,6 +21,8 @@ interface ParentCompProps {
 
 const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,description, type, priority, createdDate, comments}) => {
 
+    let username = window.localStorage.getItem('username')
+
     const [editTask, setEditTask] = useState({
         title,
         description,
@@ -56,7 +58,7 @@ const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,descripti
 
     const updateTask = (e: React.SyntheticEvent) => {
         e.preventDefault()
-        axiosInstance.patch(`/users/ram123/task/${uId}.json`, editTask)
+        axiosInstance.patch(`/users/${username}/task/${uId}.json`, editTask)
         .then(response => {
             console.log(response);
             setUpdated(!updated)

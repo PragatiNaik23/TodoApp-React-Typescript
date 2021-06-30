@@ -78,7 +78,8 @@ const Login: FC = () => {
                     correct: true
                 })
                 console.log("Go to Task Listing Page");
-                history.push('/listing')
+                window.localStorage.setItem('username', loginData.username)
+                history.push('/listing',)
             }
             else{
                 setPassword({
@@ -87,7 +88,7 @@ const Login: FC = () => {
             }
         }
     }
-    
+
     return (
         <div>
             <Header comp="Login"></Header>

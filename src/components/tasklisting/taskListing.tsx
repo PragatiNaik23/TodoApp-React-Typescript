@@ -19,6 +19,9 @@ let personalTask: any = [], workTask: any = [], miscellaneousTask: any = []
 let personalTaskIds: any = [], workTaskIds: any = [], miscellaneousTaskIds: any = []
 
 const TaskListing: FC = () => {
+
+    let username = window.localStorage.getItem('username')
+
     const [groupBy, setGroupBy] = useState({
         group: 'status'
     })
@@ -48,7 +51,7 @@ const TaskListing: FC = () => {
     useEffect(() => {
         <Loader type="ThreeDots"></Loader>
         trackPromise(
-        axiosInstance.get(`/users/ram123/task.json`)
+        axiosInstance.get(`/users/${username}/task.json`)
         .then(response => {
             taskList = response.data
             console.log(taskList)

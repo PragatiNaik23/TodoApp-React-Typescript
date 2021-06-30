@@ -14,6 +14,8 @@ const CreateTask: FC = () => {
     let today = new Date()
     let todayDate = today.getDate() + '-' + (today.getMonth()+1) + '-' + today.getFullYear();
 
+    let username = window.localStorage.getItem('username')
+
     const [createTaskData, setCreateTaskData] = useState({
         id: '',
         title:'',
@@ -61,7 +63,7 @@ const CreateTask: FC = () => {
 
     const checkTaskId = async (e: React.SyntheticEvent) => {
         e.preventDefault()
-        await axiosInstance.get(`/users/ram123/task.json`)
+        await axiosInstance.get(`/users/${username}/task.json`)
         .then(response => {
             console.log(response.data)
             taskList = response.data
@@ -94,7 +96,7 @@ const CreateTask: FC = () => {
 
     const handleSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault()
-        axiosInstance.post(`/users/ram123/task.json`, createTaskData)
+        axiosInstance.post(`/users/${username}/task.json`, createTaskData)
         .then(response => {
             console.log(response)
             setCreateTask({
