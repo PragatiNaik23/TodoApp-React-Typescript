@@ -8,8 +8,11 @@ import Card from './card';
 
 let taskList: Array<any>
 let newTask:  any = [], inProgressTask: any = [], completedtask: any = []
+let newTaskIds:  any = [], inProgressTaskIds: any = [], completedtaskIds: any = []
 let lowTask: any = [], mediumTask: any = [], highTask: any = []
+let lowTaskIds: any = [], mediumTaskIds: any = [], highTaskIds: any = []
 let personalTask: any = [], workTask: any = [], miscellaneousTask: any = []
+let personalTaskIds: any = [], workTaskIds: any = [], miscellaneousTaskIds: any = []
 
 const TaskListing: FC = () => {
     const [groupBy, setGroupBy] = useState({
@@ -63,7 +66,6 @@ const TaskListing: FC = () => {
         )
     },[])
 
-    console.log(usePromiseTracker())
     const sort = (sortBy: string) => {
         if(sortBy === "status" ){
             sortTaskByStatus()
@@ -88,6 +90,7 @@ const TaskListing: FC = () => {
             })
         }
     }
+
     const sortTaskByStatus = () => {
         newTask = []
         inProgressTask =[]
@@ -95,13 +98,16 @@ const TaskListing: FC = () => {
         for(let task in taskList){
             if(taskList[task].status === "New"){
                  newTask.push(taskList[task])
+                 newTaskIds.push(task)
             } else if(taskList[task].status === "In-Progress"){
                 inProgressTask.push(taskList[task])
+                inProgressTaskIds.push(task)
             } else{
                 completedtask.push(taskList[task])
+                completedtaskIds.push(task)
             }
         }
-
+        
         console.log("new", newTask)
         console.log("In-Progress", inProgressTask)
         console.log("completed",completedtask)
@@ -120,10 +126,13 @@ const TaskListing: FC = () => {
         for(let task in taskList){
             if(taskList[task].priority === "Low"){
                 lowTask.push(taskList[task])
+                lowTaskIds.push(task)
             } else if(taskList[task].priority === "Medium"){
                 mediumTask.push(taskList[task])
+                mediumTaskIds.push(task)
             } else{
                 highTask.push(taskList[task])
+                highTaskIds.push(task)
             }
         }
 
@@ -139,10 +148,13 @@ const TaskListing: FC = () => {
         for(let task in taskList){
             if(taskList[task].type === "Personal"){
                 personalTask.push(taskList[task])
+                personalTaskIds.push(task)
             } else if(taskList[task].type === "Work"){
                 workTask.push(taskList[task])
+                workTaskIds.push(task)
             } else{
                 miscellaneousTask.push(taskList[task])
+                miscellaneousTaskIds.push(task)
             }
         }
 
@@ -203,6 +215,7 @@ const TaskListing: FC = () => {
                                                             for (let i = 0 ; i< statusTaskLen.newLen; i++) {
                                                                 options.push(<div>
                                                                     <Card 
+                                                                        uId = {newTaskIds[i]}
                                                                         id = {newTask[i].id}
                                                                         title = {newTask[i].title}
                                                                         dueDate = {newTask[i].dueDate}
@@ -224,6 +237,7 @@ const TaskListing: FC = () => {
                                                         for (let i = 0 ; i< statusTaskLen.inProgressLen; i++) {
                                                             options.push(<div>
                                                                 <Card 
+                                                                    uId = {inProgressTaskIds[i]}
                                                                     id = {inProgressTask[i].id}
                                                                     title = {inProgressTask[i].title}
                                                                     dueDate = {inProgressTask[i].dueDate}
@@ -245,6 +259,7 @@ const TaskListing: FC = () => {
                                                         for (let i = 0 ; i< statusTaskLen.completedLen; i++) {
                                                             options.push(<div>
                                                                 <Card 
+                                                                    uId = {completedtaskIds[i]}
                                                                     id = {completedtask[i].id}
                                                                     title = {completedtask[i].title}
                                                                     dueDate = {completedtask[i].dueDate}
@@ -279,6 +294,7 @@ const TaskListing: FC = () => {
                                                         for (let i = 0 ; i< lowTask.length; i++) {
                                                             options.push(<div>
                                                                 <Card 
+                                                                    uId = {lowTaskIds[i]}
                                                                     id = {lowTask[i].id}
                                                                     title = {lowTask[i].title}
                                                                     dueDate = {lowTask[i].dueDate}
@@ -300,6 +316,7 @@ const TaskListing: FC = () => {
                                                         for (let i = 0 ; i< mediumTask.length; i++) {
                                                             options.push(<div>
                                                                 <Card 
+                                                                    uId = {mediumTaskIds[i]}
                                                                     id = {mediumTask[i].id}
                                                                     title = {mediumTask[i].title}
                                                                     dueDate = {mediumTask[i].dueDate}
@@ -321,6 +338,7 @@ const TaskListing: FC = () => {
                                                         for (let i = 0 ; i< highTask.length; i++) {
                                                             options.push(<div>
                                                                 <Card 
+                                                                    uId = {highTaskIds[i]}
                                                                     id = {highTask[i].id}
                                                                     title = {highTask[i].title}
                                                                     dueDate = {highTask[i].dueDate}
@@ -355,6 +373,7 @@ const TaskListing: FC = () => {
                                                         for (let i = 0 ; i< personalTask.length; i++) {
                                                             options.push(<div>
                                                                 <Card 
+                                                                    uId = {personalTaskIds[i]}
                                                                     id = {personalTask[i].id}
                                                                     title = {personalTask[i].title}
                                                                     dueDate = {personalTask[i].dueDate}
@@ -376,6 +395,7 @@ const TaskListing: FC = () => {
                                                         for (let i = 0 ; i< workTask.length; i++) {
                                                             options.push(<div>
                                                                 <Card 
+                                                                    uId = {workTaskIds[i]}
                                                                     id = {workTask[i].id}
                                                                     title = {workTask[i].title}
                                                                     dueDate = {workTask[i].dueDate}
@@ -397,6 +417,7 @@ const TaskListing: FC = () => {
                                                         for (let i = 0 ; i< miscellaneousTask.length; i++) {
                                                             options.push(<div>
                                                                 <Card 
+                                                                    uId = {miscellaneousTaskIds[i]}
                                                                     id = {miscellaneousTask[i].id}
                                                                     title = {miscellaneousTask[i].title}
                                                                     dueDate = {miscellaneousTask[i].dueDate}

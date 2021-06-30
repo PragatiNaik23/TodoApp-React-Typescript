@@ -1,6 +1,9 @@
 import  { ChangeEvent, FC, useState } from 'react';
 import "../../css/style.css";
 import axiosInstance from '../../axios';
+import {createBrowserHistory} from 'history';
+
+export const history = createBrowserHistory({forceRefresh:true});
 
 let userList : Array<any>
 const Login: FC = () => {

@@ -1,10 +1,11 @@
-import { FC, useState } from "react";
+import React, { FC, useState } from "react";
 import Modal from "react-modal";
 import '../../css/style.css';
 import '../../css/modal.css';
 import EditTask from "../editTask/editTask";
 
 interface ParentCompProps {
+    uId: React.ReactNode;
     id:React.ReactNode;
     title:React.ReactNode;
     dueDate: React.ReactNode;
@@ -18,8 +19,7 @@ interface ParentCompProps {
 
 let Sclasses : string, Pclasses: string, Tclasses: string
 
-const Card: FC<ParentCompProps> = ({id, title, dueDate, status,description, type, priority, createdDate, comments}) => {
-    
+const Card: FC<ParentCompProps> = ({uId, id, title, dueDate, status,description, type, priority, createdDate, comments}) => {
     if(status === "New"){
         Sclasses = "text-danger text-center"
     } else if(status === "In-Progress"){
@@ -107,6 +107,7 @@ const Card: FC<ParentCompProps> = ({id, title, dueDate, status,description, type
                         closeTimeoutMS={500}
                     >
                     <EditTask
+                        uId = {uId}
                         id = {id}
                         title = {title}
                         dueDate = {dueDate}
@@ -117,7 +118,6 @@ const Card: FC<ParentCompProps> = ({id, title, dueDate, status,description, type
                         createdDate = {createdDate}
                         comments = {comments}
                         ></EditTask>
-                    <button type="submit"  className="btn btn-success btn-lg" id="btnLogin" onClick={toggleModal}>Submit</button>
                     </Modal>
                 </div>
             </div>
