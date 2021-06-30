@@ -1,6 +1,7 @@
 import  { ChangeEvent, FC, useState} from 'react';
 import "../../css/style.css";
 import axiosInstance from '../../axios';
+import Header from '../header/header';
 
 let userList: Array<any>
 let usernameList: any = []
@@ -82,6 +83,7 @@ const Signup: FC = () => {
 
     return (
     <div>
+         <Header comp="Signup"></Header>
         {accountCreated.created === false ? (
             <div id="alert">
                 <div className="alert-box row mt-5 justify-content-center" >

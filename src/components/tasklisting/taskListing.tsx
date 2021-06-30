@@ -5,6 +5,10 @@ import tick from '../../images/tick.png';
 import '../../css/style.css';
 import axiosInstance from '../../axios';
 import Card from './card';
+import Header from "../header/header";
+import {createBrowserHistory} from 'history';
+
+export const history = createBrowserHistory({forceRefresh:true});
 
 let taskList: Array<any>
 let newTask:  any = [], inProgressTask: any = [], completedtask: any = []
@@ -166,7 +170,9 @@ const TaskListing: FC = () => {
     
 
     return(
-        <div>{usePromiseTracker().promiseInProgress === true ? (
+        <div>
+            <Header comp="Listing"></Header>
+            {usePromiseTracker().promiseInProgress === true ? (
             <div style={{display: "flex", justifyContent: "center", alignItems: "center", marginTop: "40vh",}}>
                 <Loader type="ThreeDots" color="#2BAD60" height="100" width="100"></Loader>
             </div>) : (

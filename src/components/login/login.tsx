@@ -1,9 +1,11 @@
 import  { ChangeEvent, FC, useState } from 'react';
 import "../../css/style.css";
 import axiosInstance from '../../axios';
+import Header from '../header/header';
 import {createBrowserHistory} from 'history';
 
 export const history = createBrowserHistory({forceRefresh:true});
+
 
 let userList : Array<any>
 const Login: FC = () => {
@@ -18,6 +20,7 @@ const Login: FC = () => {
     const [password, setPassword] = useState({correct: true})
 
     const [logginFailed, setLoginFailed] = useState({failed: false})
+
 
     const inputData = (e: ChangeEvent<HTMLInputElement>) => {
         setLoginData({
@@ -74,7 +77,8 @@ const Login: FC = () => {
                 setPassword({
                     correct: true
                 })
-                console.log("Go to Task Listing Page")
+                console.log("Go to Task Listing Page");
+                history.push('/listing')
             }
             else{
                 setPassword({
@@ -83,12 +87,10 @@ const Login: FC = () => {
             }
         }
     }
-
-
-
-
+    
     return (
         <div>
+            <Header comp="Login"></Header>
             {logginFailed.failed === false ? (
                 <div id="alert" style={{display:"none"}}>
                     <div className="alert-box row mt-5 justify-content-center" >
@@ -102,6 +104,7 @@ const Login: FC = () => {
                     </div>
                 </div>
             )}
+
             <div className="container col-lg-5 login">
                 <div className="card rounded-2 shadow shadow-sm">
                     <div className="card-header" id="loginHeader">
@@ -110,7 +113,7 @@ const Login: FC = () => {
                     <div className="card-body">
                         <form className="form" onSubmit={handleSubmit}>
                             {usernameExist.exist === false ? (
-                                 <div className="form-group">
+                                <div className="form-group">
                                     <input type="text" className="form-control form-control-lg rounded-2" onChange={inputData} name="username" placeholder="Username" required/>
                                     <span>Username does not exist!</span>
                                 </div>

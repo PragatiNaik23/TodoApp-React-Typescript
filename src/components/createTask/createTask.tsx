@@ -1,6 +1,10 @@
 import React, {ChangeEvent, FC, useState} from 'react'
 import '../../css/style.css'
 import axiosInstance from '../../axios';
+import Header from '../header/header';
+import {createBrowserHistory} from 'history';
+
+export const history = createBrowserHistory({forceRefresh:true});
 
 let taskList: Array<any>
 let idList: any = []
@@ -97,6 +101,7 @@ const CreateTask: FC = () => {
                 created: true
             })
             console.log("Go to Task Listing Page")
+            history.push('/listing')
         })
         .catch(error => {
             console.log(error)
@@ -108,6 +113,7 @@ const CreateTask: FC = () => {
 
     return(
         <div>
+            <Header comp="createTask"></Header>
         {createTask.created === false ? (
              <div id="alert">
                 <div className="alert-box row mt-5 justify-content-center" >
