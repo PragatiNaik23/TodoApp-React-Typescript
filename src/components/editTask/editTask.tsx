@@ -1,8 +1,9 @@
 import React, { ChangeEvent, FC, useState } from "react"
+import Modal from "react-modal";
+import {createBrowserHistory} from 'history';
 import '../../css/style.css'
 import axiosInstance from '../../axios';
-import {createBrowserHistory} from 'history';
-import Modal from "react-modal";
+
 
 export const history = createBrowserHistory({forceRefresh:true});
 interface ParentCompProps {
@@ -17,7 +18,6 @@ interface ParentCompProps {
     createdDate: React.ReactNode;
     comments: React.ReactNode;
 }
-
 
 const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,description, type, priority, createdDate, comments}) => {
 
@@ -54,6 +54,19 @@ const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,descripti
         })
     }
 
+    const [isOpen, setIsOpen] = useState(false);
+
+    function toggleModal() {
+        setIsOpen(!isOpen);
+    }
+
+    const isEnabled = editTask.title !== '' && 
+                      editTask.description !== '' &&
+                      editTask.type!== '' &&
+                      editTask.priority !== '' &&
+                      editTask.dueDate !== '' &&
+                      editTask.status !== '';
+
     const updateTask = (e: React.SyntheticEvent) => {
         e.preventDefault()
         axiosInstance.patch(`/users/${username}/task/${uId}.json`, editTask)
@@ -65,12 +78,6 @@ const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,descripti
             console.log(error)
             toggleModal()
         })
-    }
-
-    const [isOpen, setIsOpen] = useState(false);
-
-    function toggleModal() {
-        setIsOpen(!isOpen);
     }
 
     return(
@@ -151,7 +158,7 @@ const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,descripti
                     <textarea className="form-control form-control-lg rounded-2"   name="comments" placeholder="Comments" defaultValue={comments?.toString()} onChange={updateTextarea}/>  
                     </div>
 
-                    <button type="submit"  className="btn btn-success btn-lg" id="btnLogin">Submit</button>
+                    <button type="submit" disabled={!isEnabled} className="btn btn-success btn-lg" id="btnLogin">Submit</button>
                 </form>
             </div>
         </div>

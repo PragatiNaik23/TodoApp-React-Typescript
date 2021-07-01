@@ -1,12 +1,12 @@
 import  { ChangeEvent, FC, useState } from 'react';
 import Modal from "react-modal";
+import {createBrowserHistory} from 'history';
 import "../../css/style.css";
 import axiosInstance from '../../axios';
 import Header from '../header/header';
-import {createBrowserHistory} from 'history';
+
 
 export const history = createBrowserHistory({forceRefresh:true});
-
 
 let userList : Array<any>
 let user: any = []
@@ -26,6 +26,12 @@ const Login: FC = () => {
           ...loginData,
           [e.target.name] : e.target.value  
         })
+    }
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    function toggleModal() {
+        setIsOpen(!isOpen);
     }
 
     const handleSubmit = async (e: React.SyntheticEvent) => {
@@ -81,12 +87,6 @@ const Login: FC = () => {
                 correct: false
             })
         }
-    }
-
-    const [isOpen, setIsOpen] = useState(false);
-
-    function toggleModal() {
-        setIsOpen(!isOpen);
     }
 
     return (

@@ -1,9 +1,10 @@
 import React, {ChangeEvent, FC, useState} from 'react'
 import Modal from "react-modal";
+import {createBrowserHistory} from 'history';
 import '../../css/style.css'
 import axiosInstance from '../../axios';
 import Header from '../header/header';
-import {createBrowserHistory} from 'history';
+
 
 export const history = createBrowserHistory({forceRefresh:true});
 

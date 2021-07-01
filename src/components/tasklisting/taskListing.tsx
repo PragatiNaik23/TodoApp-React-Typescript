@@ -1,12 +1,13 @@
 import { ChangeEvent, FC, useEffect, useState } from "react";
 import {usePromiseTracker, trackPromise} from 'react-promise-tracker';
 import Loader from "react-loader-spinner";
+import {createBrowserHistory} from 'history';
 import tick from '../../images/tick.png';
 import '../../css/style.css';
 import axiosInstance from '../../axios';
 import Card from './card';
 import Header from "../header/header";
-import {createBrowserHistory} from 'history';
+
 
 export const history = createBrowserHistory({forceRefresh:true});
 
@@ -169,8 +170,6 @@ const TaskListing: FC = () => {
         console.log("work", workTask)
         console.log("miscellaneous",miscellaneousTask)
     }
-
-    
 
     return(
         <div>
