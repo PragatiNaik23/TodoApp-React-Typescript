@@ -1,8 +1,8 @@
 import React, { ChangeEvent, FC, useState } from "react"
 import '../../css/style.css'
 import axiosInstance from '../../axios';
-import TaskListing from "../tasklisting/taskListing";
 import {createBrowserHistory} from 'history';
+import Modal from "react-modal";
 
 export const history = createBrowserHistory({forceRefresh:true});
 interface ParentCompProps {
@@ -66,18 +66,31 @@ const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,descripti
         })
         .catch(error => {
             console.log(error)
-            setUpdated(!updated)
+            //setUpdated(!updated)
+            toggleModal()
         })
     }
 
+    const [isOpen, setIsOpen] = useState(false);
+
+    function toggleModal() {
+        setIsOpen(!isOpen);
+    }
+
     return(
-        <div>
-            {updated === false ? (
-                 <div id="alert">
-                 <div className="alert-box row mt-5 justify-content-center" >
-                     <h2>Task not updated!</h2>
-                 </div>
-             </div>) : null }
+        <div> 
+            <Modal
+            isOpen={isOpen}
+            onRequestClose={toggleModal}
+            contentLabel="My dialog"
+            className="editmodal"
+            overlayClassName="myoverlay"
+            closeTimeoutMS={500}
+        >
+            <h2 className="text-danger">Task Cannot be Updated!</h2>
+            <h6>Check your internet connection</h6>
+            <button type="submit"  className="btn btn-success btn-lg mt-3" id="btnLogin" onClick={toggleModal}>Close</button>
+        </Modal>
             <div>
                 <div className="card-header" id = "loginHeader" >
                     <h3 className="mb-0 text-center text-white" >Edit Your Task</h3>

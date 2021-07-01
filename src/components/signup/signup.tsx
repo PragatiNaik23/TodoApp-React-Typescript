@@ -111,7 +111,7 @@ const Signup: FC = () => {
                         </div>) : (
                         <div className="form-group">
                             <input type="text" className="form-control form-control-lg rounded-2" onChange={updateData} name="username" placeholder="Username" required/>
-                            <span>Username already in use!</span>
+                            <span className="text-danger">Username already in use!</span>
                         </div>
                         )}
                         <div className="form-group">

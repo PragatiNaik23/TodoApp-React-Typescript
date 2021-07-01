@@ -146,7 +146,7 @@ const CreateTask: FC = () => {
                             <div className="form-group">
                                 <label><b>Id<small className="text-danger"><b>*</b></small></b></label>
                                 <input type="number" className="form-control form-control-lg rounded-2" onChange={inputData} name="id" placeholder="Id"  required/>
-                                <span>ID already in use!</span>
+                                <span className="text-danger">ID already in use!</span>
                             </div>)}
                             
 

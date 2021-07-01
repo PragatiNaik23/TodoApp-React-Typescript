@@ -116,7 +116,7 @@ const Login: FC = () => {
                             {usernameExist.exist === false ? (
                                 <div className="form-group">
                                     <input type="text" className="form-control form-control-lg rounded-2" onChange={inputData} name="username" placeholder="Username" required/>
-                                    <span>Username does not exist!</span>
+                                    <span className="text-danger">Username does not exist!</span>
                                 </div>
                             ) : (
                                 <div className="form-group">
@@ -126,7 +126,7 @@ const Login: FC = () => {
                             {password.correct === false ? (
                                 <div className="form-group">
                                     <input type="password" className="form-control form-control-lg rounded-2"  onChange={inputData} name="password" placeholder="Password" required/>
-                                    <span>Password incorrect!</span>
+                                    <span className="text-danger">Password incorrect!</span>
                                 </div>) : (
                                     <div className="form-group">
                                         <input type="password" className="form-control form-control-lg rounded-2"  onChange={inputData} name="password" placeholder="Password" required/>
