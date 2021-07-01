@@ -1,7 +1,11 @@
 import  { ChangeEvent, FC, useState} from 'react';
+import Modal from "react-modal";
 import "../../css/style.css";
 import axiosInstance from '../../axios';
 import Header from '../header/header';
+import {createBrowserHistory} from 'history';
+
+export const history = createBrowserHistory({forceRefresh:true});
 
 let userList: Array<any>
 let usernameList: any = []
@@ -25,9 +29,11 @@ const Signup: FC = () => {
         exist: false
     })
 
-    const [accountCreated, setAccountCreated] = useState({
-        created: true
-    })
+    const [isOpen, setIsOpen] = useState(false);
+
+    function toggleModal() {
+        setIsOpen(!isOpen);
+    }
 
     const checkUsername = async (e: React.SyntheticEvent) => {
         e.preventDefault()
@@ -48,9 +54,6 @@ const Signup: FC = () => {
             setUserExist({
                 exist: true
             })
-            setAccountCreated({
-                created: true
-            })
         } else{
             handleSubmit(e)
         }     
@@ -61,40 +64,39 @@ const Signup: FC = () => {
         axiosInstance.post(`/users/${formData.username}.json`, formData)
         .then(response => {
             console.log(response)
-            setAccountCreated({
-                created: true
-            })
             setUserExist({
                 exist: false
             })
             console.log("Go to Login")
+            history.push('/')
         })
         .catch(error => {
             console.log(error)
-            setAccountCreated({
-                created: false
-            })
             setUserExist({
                 exist: false
             })
+            toggleModal()
         })
     }
     
 
     return (
     <div>
-         <Header comp="Signup"></Header>
-        {accountCreated.created === false ? (
-            <div id="alert">
-                <div className="alert-box row mt-5 justify-content-center" >
-                    <h2>Account Registration Failed!</h2>
-                </div>
-            </div>) : (
-            <div id="alert" style={{display:"none"}}>
-                <div className="alert-box row mt-5 justify-content-center" >
-                    <h2>Account Registration Failed!</h2>
-                </div>
-            </div>)}
+        <Header comp="Signup"></Header>
+
+        <Modal
+            isOpen={isOpen}
+            onRequestClose={toggleModal}
+            contentLabel="My dialog"
+            className="editmodal"
+            overlayClassName="myoverlay"
+            closeTimeoutMS={500}
+            >
+            <h2 className="text-danger">Account cannot be created!</h2>
+            <h6>Check your internet connection</h6>
+            <button type="submit"  className="btn btn-success btn-lg mt-3" id="btnLogin" onClick={toggleModal}>Close</button>
+        </Modal>
+
         <div className="container col-lg-5 login">
             <div className="card rounded-2 shadow shadow-sm">
                 <div className="card-header" id = "loginHeader">

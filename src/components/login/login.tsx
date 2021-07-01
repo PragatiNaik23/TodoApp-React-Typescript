@@ -1,4 +1,5 @@
 import  { ChangeEvent, FC, useState } from 'react';
+import Modal from "react-modal";
 import "../../css/style.css";
 import axiosInstance from '../../axios';
 import Header from '../header/header';
@@ -20,9 +21,6 @@ const Login: FC = () => {
 
     const [password, setPassword] = useState({correct: true})
 
-    const [logginFailed, setLoginFailed] = useState({failed: false})
-
-
     const inputData = (e: ChangeEvent<HTMLInputElement>) => {
         setLoginData({
           ...loginData,
@@ -35,16 +33,25 @@ const Login: FC = () => {
         await axiosInstance.get(`/users/${loginData.username}.json`)
         .then(response => {
             userList = response.data
-            setLoginFailed({
-                failed: false
-            })
-            //console.log(userList)
+            if(userList === null){
+                setUsernameExist({
+                    exist: false
+                })
+    
+                setPassword({
+                    correct: true
+                })
+            }
+            else{
+                setUsernameExist({
+                    exist: true
+                })
+                auth()
+            }
         })
         .catch(error => {
             console.log(error)
-            setLoginFailed({
-                failed: true
-            })
+            toggleModal()
 
             setUsernameExist({
                 exist: true
@@ -54,22 +61,6 @@ const Login: FC = () => {
                 correct: true
             })
         })
-
-        if(userList === null){
-            setUsernameExist({
-                exist: false
-            })
-
-            setPassword({
-                correct: true
-            })
-        }
-        else{
-            setUsernameExist({
-                exist: true
-            })
-            auth()
-        }
     }
 
     const auth = () => {
@@ -83,7 +74,7 @@ const Login: FC = () => {
             })
             console.log("Go to Task Listing Page");
             window.localStorage.setItem('username', loginData.username)
-            history.push('/listing',)
+            history.push('/listing')
         }
         else{
             setPassword({
@@ -92,22 +83,28 @@ const Login: FC = () => {
         }
     }
 
+    const [isOpen, setIsOpen] = useState(false);
+
+    function toggleModal() {
+        setIsOpen(!isOpen);
+    }
+
     return (
         <div>
             <Header comp="Login"></Header>
-            {logginFailed.failed === false ? (
-                <div id="alert" style={{display:"none"}}>
-                    <div className="alert-box row mt-5 justify-content-center" >
-                        <h2>Login Failed</h2>
-                    </div>
-                </div>
-            ) : (
-                <div id="alert">
-                    <div className="alert-box row mt-5 justify-content-center" >
-                        <h2>Login Failed</h2>
-                    </div>
-                </div>
-            )}
+
+            <Modal
+            isOpen={isOpen}
+            onRequestClose={toggleModal}
+            contentLabel="My dialog"
+            className="editmodal"
+            overlayClassName="myoverlay"
+            closeTimeoutMS={500}
+            >
+            <h2 className="text-danger">Login Failed!</h2>
+            <h6>Check your internet connection</h6>
+            <button type="submit"  className="btn btn-success btn-lg mt-3" id="btnLogin" onClick={toggleModal}>Close</button>
+            </Modal>
 
             <div className="container col-lg-5 login">
                 <div className="card rounded-2 shadow shadow-sm">

@@ -54,19 +54,15 @@ const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,descripti
         })
     }
 
-    const [updated, setUpdated] = useState(true)
-
     const updateTask = (e: React.SyntheticEvent) => {
         e.preventDefault()
         axiosInstance.patch(`/users/${username}/task/${uId}.json`, editTask)
         .then(response => {
             console.log(response);
-            setUpdated(!updated)
             history.replace('/listing')
         })
         .catch(error => {
             console.log(error)
-            //setUpdated(!updated)
             toggleModal()
         })
     }
@@ -86,11 +82,11 @@ const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,descripti
             className="editmodal"
             overlayClassName="myoverlay"
             closeTimeoutMS={500}
-        >
+            >
             <h2 className="text-danger">Task Cannot be Updated!</h2>
             <h6>Check your internet connection</h6>
             <button type="submit"  className="btn btn-success btn-lg mt-3" id="btnLogin" onClick={toggleModal}>Close</button>
-        </Modal>
+            </Modal>
             <div>
                 <div className="card-header" id = "loginHeader" >
                     <h3 className="mb-0 text-center text-white" >Edit Your Task</h3>
