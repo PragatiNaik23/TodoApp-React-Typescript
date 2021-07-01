@@ -8,6 +8,7 @@ export const history = createBrowserHistory({forceRefresh:true});
 
 
 let userList : Array<any>
+let user: any = []
 const Login: FC = () => {
 
     const [loginData, setLoginData] = useState({
@@ -37,7 +38,7 @@ const Login: FC = () => {
             setLoginFailed({
                 failed: false
             })
-            // console.log(userList)
+            //console.log(userList)
         })
         .catch(error => {
             console.log(error)
@@ -73,19 +74,21 @@ const Login: FC = () => {
 
     const auth = () => {
         for(let details in userList){
-            if(userList[details].password === loginData.password){
-                setPassword({
-                    correct: true
-                })
-                console.log("Go to Task Listing Page");
-                window.localStorage.setItem('username', loginData.username)
-                history.push('/listing',)
-            }
-            else{
-                setPassword({
-                    correct: false
-                })
-            }
+            user.push(userList[details])
+        }
+
+        if(user[0].password === loginData.password){
+            setPassword({
+                correct: true
+            })
+            console.log("Go to Task Listing Page");
+            window.localStorage.setItem('username', loginData.username)
+            history.push('/listing',)
+        }
+        else{
+            setPassword({
+                correct: false
+            })
         }
     }
 
