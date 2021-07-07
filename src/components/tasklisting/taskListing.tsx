@@ -7,17 +7,19 @@ import '../../css/style.css';
 import axiosInstance from '../../axios';
 import Card from './card';
 import Header from "../header/header";
+import { Task } from "../../modalClass/Task";
 
 
 export const history = createBrowserHistory({forceRefresh:true});
 
-let taskList: Array<any>
-let newTask:  any = [], inProgressTask: any = [], completedtask: any = []
-let newTaskIds:  any = [], inProgressTaskIds: any = [], completedtaskIds: any = []
-let lowTask: any = [], mediumTask: any = [], highTask: any = []
-let lowTaskIds: any = [], mediumTaskIds: any = [], highTaskIds: any = []
-let personalTask: any = [], workTask: any = [], miscellaneousTask: any = []
-let personalTaskIds: any = [], workTaskIds: any = [], miscellaneousTaskIds: any = []
+
+let taskList: Array<Task>
+let newTask:  Task[] = [], inProgressTask:  Task[] = [], completedtask: Task[] = []
+let newTaskIds:  string[] = [], inProgressTaskIds: string[] = [], completedtaskIds: string[] = []
+let lowTask: Task[] = [], mediumTask: Task[] = [], highTask: Task[] = []
+let lowTaskIds: string[] = [], mediumTaskIds: string[] = [], highTaskIds: string[] = []
+let personalTask: Task[] = [], workTask: Task[] = [], miscellaneousTask: Task[] = []
+let personalTaskIds: string[] = [], workTaskIds: string[] = [], miscellaneousTaskIds: string[] = []
 
 const TaskListing: FC = () => {
 
@@ -52,10 +54,10 @@ const TaskListing: FC = () => {
     useEffect(() => {
         <Loader type="ThreeDots"></Loader>
         trackPromise(
-        axiosInstance.get(`/users/${username}/task.json`)
+        axiosInstance.get(`/users/${username}/Task.json`)
         .then(response => {
             taskList = response.data
-            console.log(taskList)
+            console.log("Tasks",taskList)
             if(taskList === null){
                 setDataFetch({
                     data:false
@@ -73,6 +75,7 @@ const TaskListing: FC = () => {
         })
         )
     },[])
+      
 
     const sort = (sortBy: string) => {
         if(sortBy === "status" ){

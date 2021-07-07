@@ -6,6 +6,7 @@ import axiosInstance from '../../axios';
 
 
 export const history = createBrowserHistory({forceRefresh:true});
+
 interface ParentCompProps {
     uId: React.ReactNode;
     id:React.ReactNode;
@@ -69,7 +70,7 @@ const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,descripti
 
     const updateTask = (e: React.SyntheticEvent) => {
         e.preventDefault()
-        axiosInstance.patch(`/users/${username}/task/${uId}.json`, editTask)
+        axiosInstance.patch(`/users/${username}/Task/${uId}.json`, editTask)
         .then(response => {
             console.log(response);
             history.replace('/listing')

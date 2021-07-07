@@ -1,15 +1,18 @@
-import  { ChangeEvent, FC, useState } from 'react';
+import  { ChangeEvent, FC, useState} from 'react';
 import Modal from "react-modal";
 import {createBrowserHistory} from 'history';
 import "../../css/style.css";
 import axiosInstance from '../../axios';
 import Header from '../header/header';
+import { User } from '../../modalClass/user';
+
+
 
 
 export const history = createBrowserHistory({forceRefresh:true});
 
-let userList : Array<any>
-let user: any = []
+let userDetail : Array<User>
+
 const Login: FC = () => {
 
     const [loginData, setLoginData] = useState({
@@ -36,10 +39,11 @@ const Login: FC = () => {
 
     const handleSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault()
-        await axiosInstance.get(`/users/${loginData.username}.json`)
+        await axiosInstance.get(`/users/${loginData.username}/Details.json`)
         .then(response => {
-            userList = response.data
-            if(userList === null){
+            userDetail = response.data
+
+            if(userDetail === null){
                 setUsernameExist({
                     exist: false
                 })
@@ -56,6 +60,7 @@ const Login: FC = () => {
             }
         })
         .catch(error => {
+            console.log("here")
             console.log(error)
             toggleModal()
 
@@ -70,27 +75,26 @@ const Login: FC = () => {
     }
 
     const auth = () => {
-        for(let details in userList){
-            user.push(userList[details])
-        }
-
-        if(user[0].password === loginData.password){
+        for(let details in userDetail){
+           if(userDetail[details].password=== loginData.password){
             setPassword({
                 correct: true
             })
             console.log("Go to Task Listing Page");
             window.localStorage.setItem('username', loginData.username)
             history.push('/listing')
-        }
-        else{
-            setPassword({
-                correct: false
-            })
-        }
+            }
+            else{
+                setPassword({
+                    correct: false
+                })
+            }
+        }   
     }
 
     return (
         <div>
+
             <Header comp="Login"></Header>
 
             <Modal

@@ -4,28 +4,32 @@ import {createBrowserHistory} from 'history';
 import '../../css/style.css'
 import axiosInstance from '../../axios';
 import Header from '../header/header';
+import { Task } from '../../modalClass/Task';
+import moment from 'moment';
 
 
 export const history = createBrowserHistory({forceRefresh:true});
 
-let taskList: Array<any>
-let idList: any = []
+let taskList: Array<Task>
+let idList: number[] = []
 
 const CreateTask: FC = () => {
 
-    let today = new Date()
-    let todayDate = today.getDate() + '-' + (today.getMonth()+1) + '-' + today.getFullYear();
+    let date = new Date()
+    let datestring = ('0' + date.getDate()).slice(-2)  + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + date.getFullYear();
+    let today = moment(datestring).toDate()
+
 
     let username = window.localStorage.getItem('username')
 
-    const [createTaskData, setCreateTaskData] = useState({
-        id: '',
+    const [createTaskData, setCreateTaskData] = useState<Task>({
+        id: 0,
         title:'',
         description: '',
         type: '',
         priority: '',
-        dueDate: '',
-        createdDate: todayDate,
+        dueDate: undefined,
+        createdDate: today,
         comments: '',
         status: "New"
     })
@@ -60,27 +64,29 @@ const CreateTask: FC = () => {
         setIsOpen(!isOpen);
     }
 
-    const isEnabled = createTaskData.title.length > 0 && 
-                      createTaskData.id.length > 0 &&
-                      createTaskData.description.length >0 &&
-                      createTaskData.type.length > 0 &&
-                      createTaskData.priority.length>0 &&
-                      createTaskData.dueDate.length > 0;
+    const isEnabled = createTaskData.title !== '' && 
+                      createTaskData.id !>= 0 &&
+                      createTaskData.description !== '' &&
+                      createTaskData.type !== '' &&
+                      createTaskData.priority !== '' &&
+                      createTaskData.dueDate !== undefined;
 
     const checkTaskId = async (e: React.SyntheticEvent) => {
         e.preventDefault()
-        await axiosInstance.get(`/users/${username}/task.json`)
+        await axiosInstance.get(`/users/${username}/Task.json`)
         .then(response => {
             console.log(response.data)
             taskList = response.data
+            console.log(taskList)
         })
         .catch(error => console.log(error))
 
+
         if(taskList !== null){
             for(let task in taskList){
-                idList.push(taskList[task].id )
+                idList.push(taskList[task].id as number)
             }
-            if(idList.includes(createTaskData.id)){
+            if(idList.includes(createTaskData.id as number)){
                 setDupId({
                     duplicate: true
                 })
@@ -98,9 +104,9 @@ const CreateTask: FC = () => {
 
     const handleSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault()
-        axiosInstance.post(`/users/${username}/task.json`, createTaskData)
+        axiosInstance.post(`/users/${username}/Task.json`, createTaskData)
         .then(response => {
-            console.log(response)
+            //console.log(response)
             console.log("Go to Task Listing Page")
             history.push('/listing')
         })
@@ -185,7 +191,7 @@ const CreateTask: FC = () => {
 
                             <div className="form-group">
                                 <label><b>Created Date</b></label>
-                                <input type="text"  className="form-control form-control-lg rounded-2" name="createdDate" value= {todayDate} required/>
+                                <input type="text"  className="form-control form-control-lg rounded-2" name="createdDate" value= {datestring} required/>
                             </div>
 
                             <div className="form-group">
@@ -202,3 +208,4 @@ const CreateTask: FC = () => {
 }
 
 export default CreateTask;
+

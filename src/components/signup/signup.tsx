@@ -4,12 +4,14 @@ import {createBrowserHistory} from 'history';
 import "../../css/style.css";
 import axiosInstance from '../../axios';
 import Header from '../header/header';
+import { User } from '../../modalClass/user';
 
 
 export const history = createBrowserHistory({forceRefresh:true});
 
-let userList: Array<any>
-let usernameList: any = []
+let userList: Array<User>
+let usernameList: string[] = []
+
 const Signup: FC = () => {
 
     const [formData, setFormData] = useState({
@@ -62,7 +64,7 @@ const Signup: FC = () => {
 
     const handleSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault()
-        axiosInstance.post(`/users/${formData.username}.json`, formData)
+        axiosInstance.post(`/users/${formData.username}/Details.json`, formData)
         .then(response => {
             console.log(response)
             setUserExist({
