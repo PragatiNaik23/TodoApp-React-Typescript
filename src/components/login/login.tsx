@@ -94,9 +94,6 @@ const Login: FC = () => {
 
     return (
         <div>
-
-            <Header comp="Login"></Header>
-
             <Modal
             isOpen={isOpen}
             onRequestClose={toggleModal}

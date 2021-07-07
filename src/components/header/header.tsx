@@ -1,16 +1,14 @@
 import React, { FC} from "react";
+import { useLocation} from 'react-router-dom'
 import {createBrowserHistory} from 'history';
 import logo from '../../images/logo.png'
 import '../../css/header.css'
 
-
 export const history = createBrowserHistory({forceRefresh:true});
 
-interface ParentCompProps {
-    comp: React.ReactNode
-}
+const Header: FC = () => {
 
-const Header: FC<ParentCompProps> = ({comp}) => {
+    const urlPath = useLocation()
 
     const logout = (e: React.SyntheticEvent) => {
         e.preventDefault()
@@ -26,44 +24,26 @@ const Header: FC<ParentCompProps> = ({comp}) => {
                 <div className="container-fluid">
                     <img className="logo" src={logo} alt="logo" />
                     <ul className="navbar-nav ml-auto nav"> 
-                        {(() => {
-                            let options = [];
-                            if(comp === "Login"){
-                                options= []
-                                options.push(
-                                <li className="navbar-nav ml-auto">
-                                    <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={() => {history.push('/signup')}}>Sign Up</button>
-                                </li>
-                                )
-                                return options;
-                            } else if (comp === "Signup"){
-                                options= []
-                                options.push(
-                                    <li className="navbar-nav ml-auto">
-                                        <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={() => {history.push('/')}}>Login</button>
-                                    </li>
-                                )
-                                return options;
-                            } else if(comp === "Listing"){
-                                options= []
-                                options.push(
-                                    <li className="navbar-nav ml-auto">
-                                        <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={logout}>Logout</button>
-                                        <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={() => {history.push('/create')}}>Create Task</button>
-                                    </li>
-                                )
-                                return options;
-                            } else if(comp === "createTask"){
-                                options= []
-                                options.push(
-                                    <li className="navbar-nav ml-auto">
-                                        <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={logout}>Logout</button>
-                                        <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={() => {history.push('/listing')}}>Tasks</button>
-                                    </li>
-                                )
-                                return options;
-                            }   
-                        })()}
+                        {urlPath.pathname === '/' ? (
+                            <li className="navbar-nav ml-auto">
+                                <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={() => {history.push('/signup')}}>Sign Up</button>
+                            </li>
+                        ) : (urlPath.pathname === '/signup' ? (
+                            <li className="navbar-nav ml-auto">
+                                <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={() => {history.push('/')}}>Login</button>
+                            </li>
+                        ) : (urlPath.pathname === '/listing' ? (
+                            <li className="navbar-nav ml-auto">
+                                <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={logout}>Logout</button>
+                                <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={() => {history.push('/create')}}>Create Task</button>
+                            </li>
+                        ) : (urlPath.pathname === '/create' ? (
+                            <li className="navbar-nav ml-auto">
+                                <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={logout}>Logout</button>
+                                <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={() => {history.push('/listing')}}>Tasks</button>
+                            </li>
+                        ) : (null))))
+                        }
                     </ul> 
                 </div>
             </nav>

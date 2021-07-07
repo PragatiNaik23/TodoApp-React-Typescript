@@ -85,8 +85,6 @@ const Signup: FC = () => {
 
     return (
     <div>
-        <Header comp="Signup"></Header>
-
         <Modal
             isOpen={isOpen}
             onRequestClose={toggleModal}

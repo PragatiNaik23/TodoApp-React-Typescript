@@ -176,7 +176,6 @@ const TaskListing: FC = () => {
 
     return(
         <div>
-            <Header comp="Listing"></Header>
             {usePromiseTracker().promiseInProgress === true ? (
             <div style={{display: "flex", justifyContent: "center", alignItems: "center", marginTop: "40vh",}}>
                 <Loader type="ThreeDots" color="#2BAD60" height="100" width="100"></Loader>

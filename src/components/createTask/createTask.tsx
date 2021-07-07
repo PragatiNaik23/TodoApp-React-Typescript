@@ -119,7 +119,6 @@ const CreateTask: FC = () => {
 
     return(
         <div>
-            <Header comp="createTask"></Header>
             <Modal
             isOpen={isOpen}
             onRequestClose={toggleModal}
