@@ -34,7 +34,7 @@ const TaskListing: FC = () => {
             ...groupBy,
             [e.target.name] : e.target.value
         })
-        sort(e.target.value)
+        e.target.value === "status" ? (sortTaskByStatus()) : (e.target.value === "priority" ? sortTaskByPriority() : sortTaskByType())
     }
 
     const [headers, setHeaders] = useState({
@@ -75,32 +75,7 @@ const TaskListing: FC = () => {
         })
         )
     },[])
-      
 
-    const sort = (sortBy: string) => {
-        if(sortBy === "status" ){
-            sortTaskByStatus()
-            setHeaders({
-                statusHeader: true,
-                priorityHeader: false,
-                typeHeader: false
-            })
-        } else if(sortBy === "priority"){
-            sortTaskByPriority()
-            setHeaders({
-                statusHeader: false,
-                priorityHeader: true,
-                typeHeader: false
-            })
-        } else{
-            sortTaskByType()
-            setHeaders({
-                statusHeader: false,
-                priorityHeader: false,
-                typeHeader: true
-            })
-        }
-    }
 
     const sortTaskByStatus = () => {
         newTask = []
@@ -128,6 +103,12 @@ const TaskListing: FC = () => {
             inProgressLen: inProgressTask.length,
             completedLen: completedtask.length
         })
+
+        setHeaders({
+            statusHeader: true,
+            priorityHeader: false,
+            typeHeader: false
+        })
     }
 
     const sortTaskByPriority = () => {
@@ -150,6 +131,12 @@ const TaskListing: FC = () => {
         console.log("low", lowTask)
         console.log("medium", mediumTask)
         console.log("high",highTask) 
+
+        setHeaders({
+            statusHeader: false,
+            priorityHeader: true,
+            typeHeader: false
+        })
     }
 
     const sortTaskByType = () => {
@@ -172,6 +159,12 @@ const TaskListing: FC = () => {
         console.log("personal", personalTask)
         console.log("work", workTask)
         console.log("miscellaneous",miscellaneousTask)
+
+        setHeaders({
+            statusHeader: false,
+            priorityHeader: false,
+            typeHeader: true
+        })
     }
 
     return(
