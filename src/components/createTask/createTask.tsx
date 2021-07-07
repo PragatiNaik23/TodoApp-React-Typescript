@@ -1,11 +1,12 @@
 import React, {ChangeEvent, FC, useState} from 'react'
 import Modal from "react-modal";
 import {createBrowserHistory} from 'history';
+import moment from 'moment';
 import '../../css/style.css'
 import axiosInstance from '../../axios';
 import Header from '../header/header';
 import { Task } from '../../modalClass/Task';
-import moment from 'moment';
+import TaskForm from '../../common/taskForm';
 
 
 export const history = createBrowserHistory({forceRefresh:true});
@@ -34,14 +35,14 @@ const CreateTask: FC = () => {
         status: "New"
     })
 
-    const inputData = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputData = (e: ChangeEvent<HTMLInputElement>):void => {
         setCreateTaskData({
             ...createTaskData,
             [e.target.name] : e.target.value
         })
 
     }
-
+    console.log(createTaskData.id)
     const textareaData = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setCreateTaskData({
             ...createTaskData,
@@ -137,69 +138,27 @@ const CreateTask: FC = () => {
                         <h3 className="mb-0 text-center text-white">Create Task</h3>
                     </div>
                     <div className="card-body">
-                        <form className="form" id="formcreatetask" onSubmit={checkTaskId}>
-                            <small className="text-danger">Note: Id should be unique!</small>
-                            <br></br>
-                            <small className="text-danger ml-lg-4">&nbsp;&nbsp;&nbsp;* means required field!</small>
-
-                            { dupId.duplicate === false ? (
-                                <div className="form-group">
-                                    <label><b>Id<small className="text-danger"><b>*</b></small></b></label>
-                                    <input type="number" className="form-control form-control-lg rounded-2" onChange={inputData} name="id" placeholder="Id"  required/>
-                                </div>) : (
-                                <div className="form-group">
-                                    <label><b>Id<small className="text-danger"><b>*</b></small></b></label>
-                                    <input type="number" className="form-control form-control-lg rounded-2" onChange={inputData} name="id" placeholder="Id"  required/>
-                                    <span className="text-danger">ID already in use!</span>
-                                </div>)}
-                                
-
-                            <div className="form-group">
-                            <label><b>Title<small className="text-danger"><b>*</b></small></b></label>
-                                <input type="text" className="form-control form-control-lg rounded-2" onChange={inputData} name="title" placeholder="Title"  required/>
-                            </div>
-
-                            <div className="form-group">
-                            <label><b>Description<small className="text-danger"><b>*</b></small></b></label>
-                                <textarea  className="form-control form-control-lg rounded-2" onChange={textareaData} name="description" placeholder="Description" required/>
-                            </div>
-
-                            <div className="form-group">
-                                <label><b>Select Type <small className="text-danger"><b>*</b></small></b></label>
-                                <select name="type" id="type" className="form-control form-control-lg rounded-2" onChange={selectData} required>
-                                    <option value=""> </option>
-                                    <option value="Personal"> Personal</option>
-                                    <option value="Work">Work</option>
-                                    <option value="Miscellaneous">Miscellaneous</option>
-                                </select>
-                            </div>
-
-                            <div className="form-group">
-                                <label><b>Select Priority <small className="text-danger"><b>*</b></small></b></label>
-                                <select name="priority" id="priority" className="form-control form-control-lg rounded-2" onChange={selectData} required>
-                                    <option value=""> </option>
-                                    <option value="Low"> Low</option>
-                                    <option value="Medium">Medium</option>
-                                    <option value="High">High</option>
-                                </select>
-                            </div>
-
-                            <div className="form-group">
-                                <label><b>Due Date <small className="text-danger"><b>*</b></small></b></label>
-                                <input type="date"  className="form-control form-control-lg rounded-2" name="dueDate"  onChange={inputData} required/>
-                            </div>
-
-                            <div className="form-group">
-                                <label><b>Created Date</b></label>
-                                <input type="text"  className="form-control form-control-lg rounded-2" name="createdDate" value= {datestring} required/>
-                            </div>
-
-                            <div className="form-group">
-                            <textarea className="form-control form-control-lg rounded-2"  onChange={textareaData} name="comments" placeholder="Comments"/>  
-                            </div>
-
-                            <button type="submit" disabled = {!isEnabled} className="btn btn-success btn-lg" id="btnLogin">Submit</button>
-                        </form>
+                        <small className="text-danger">Note: Id should be unique!</small>
+                        <br></br>
+                        <small className="text-danger ml-lg-4">&nbsp;&nbsp;&nbsp;* means required field!</small>
+                        <TaskForm 
+                             id = {0}
+                             title = ""
+                             dueDate = {undefined}
+                             status = ""
+                             description = ""
+                             type = ""
+                             priority = ""
+                             createdDate = {today}
+                             comments = ""
+                             isEnabled = {isEnabled}
+                             inputData = {inputData}
+                             textareaData = {textareaData}
+                             selectData = {selectData}
+                             submit = {checkTaskId}
+                             dupId={dupId.duplicate}
+                             createTask= {true}
+                        ></TaskForm>
                     </div>
                 </div>
             </div>

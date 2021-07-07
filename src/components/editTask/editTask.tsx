@@ -3,21 +3,22 @@ import Modal from "react-modal";
 import {createBrowserHistory} from 'history';
 import '../../css/style.css'
 import axiosInstance from '../../axios';
+import TaskForm from "../../common/taskForm";
 
 
 export const history = createBrowserHistory({forceRefresh:true});
 
 interface ParentCompProps {
-    uId: React.ReactNode;
-    id:React.ReactNode;
-    title:React.ReactNode;
-    dueDate: React.ReactNode;
-    status: React.ReactNode;
-    description: React.ReactNode;
-    type: React.ReactNode;
-    priority: React.ReactNode;
-    createdDate: React.ReactNode;
-    comments: React.ReactNode;
+    uId: string | undefined;
+    id:number | undefined;
+    title:string | undefined;
+    dueDate: Date | undefined;
+    status: string | undefined;
+    description: string | undefined;
+    type: string | undefined;
+    priority: string | undefined;
+    createdDate: Date | undefined;
+    comments: string | undefined;
 }
 
 const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,description, type, priority, createdDate, comments}) => {
@@ -65,7 +66,7 @@ const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,descripti
                       editTask.description !== '' &&
                       editTask.type!== '' &&
                       editTask.priority !== '' &&
-                      editTask.dueDate !== '' &&
+                      editTask.dueDate !== undefined &&
                       editTask.status !== '';
 
     const updateTask = (e: React.SyntheticEvent) => {
@@ -99,7 +100,7 @@ const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,descripti
                 <div className="card-header" id = "loginHeader" >
                     <h3 className="mb-0 text-center text-white" >Edit Your Task</h3>
                 </div>
-                <form className="form" id="formcreatetask" onSubmit={updateTask}>
+                {/* <form className="form" id="formcreatetask" onSubmit={updateTask}>
                     <div className="form-group mt-2">
                         <label><b>Id<small className="text-danger"><b>*</b></small></b></label>
                         <input type="text" className="form-control form-control-lg rounded-2"  name="title" placeholder="Title" defaultValue={id?.toString()} required disabled/>
@@ -160,7 +161,25 @@ const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,descripti
                     </div>
 
                     <button type="submit" disabled={!isEnabled} className="btn btn-success btn-lg" id="btnLogin">Submit</button>
-                </form>
+                </form> */}
+                <TaskForm 
+                    id = {id}
+                    title = {title}
+                    dueDate = {dueDate}
+                    status = {status}
+                    description = {description}
+                    type = {type}
+                    priority = {priority}
+                    createdDate = {createdDate}
+                    comments = {comments}
+                    isEnabled = {isEnabled}
+                    inputData = {updateInput}
+                    textareaData = {updateTextarea}
+                    selectData = {updateSelect}
+                    submit = {updateTask}
+                    dupId={false}
+                    createTask= {false}
+                ></TaskForm>
             </div>
         </div>
     );

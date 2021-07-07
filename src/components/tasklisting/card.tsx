@@ -5,16 +5,16 @@ import '../../css/modal.css';
 import EditTask from "../editTask/editTask";
 
 interface ParentCompProps {
-    uId: React.ReactNode;
-    id:React.ReactNode;
-    title:React.ReactNode;
-    dueDate: React.ReactNode;
-    status: React.ReactNode;
-    description: React.ReactNode;
-    type: React.ReactNode;
-    priority: React.ReactNode;
-    createdDate: React.ReactNode;
-    comments: React.ReactNode;
+    uId: string | undefined;
+    id:number | undefined;
+    title:string | undefined;
+    dueDate: Date | undefined;
+    status: string | undefined;
+    description: string | undefined;
+    type: string | undefined;
+    priority: string | undefined;
+    createdDate: Date | undefined;
+    comments: string | undefined;
 }
 
 let Sclasses : string, Pclasses: string, Tclasses: string
