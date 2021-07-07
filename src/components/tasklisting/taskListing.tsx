@@ -6,7 +6,6 @@ import tick from '../../images/tick.png';
 import '../../css/style.css';
 import axiosInstance from '../../axios';
 import Card from './card';
-import Header from "../header/header";
 import { Task } from "../../modalClass/Task";
 
 
@@ -170,7 +169,7 @@ const TaskListing: FC = () => {
     return(
         <div>
             {usePromiseTracker().promiseInProgress === true ? (
-            <div style={{display: "flex", justifyContent: "center", alignItems: "center", marginTop: "40vh",}}>
+            <div className="loading">
                 <Loader type="ThreeDots" color="#2BAD60" height="100" width="100"></Loader>
             </div>) : (
                 <div>
@@ -183,12 +182,7 @@ const TaskListing: FC = () => {
                             <div className="alert-box row mt-5 justify-content-center" >
                                 <h2>No task created!</h2>
                             </div>
-                        </div>) : (
-                        <div id="alert" style={{display:"none"}}>
-                            <div className="alert-box row mt-5 justify-content-center" >
-                                <h2>No task created!</h2>
-                            </div>
-                        </div>)}
+                        </div>) : (null)}
                     {(() => {
                         const outerHTML = [];
                         if(dataFetch.data === true){

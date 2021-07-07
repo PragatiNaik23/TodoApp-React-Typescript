@@ -30,4 +30,11 @@ span{
     margin-left: 35%;
 }
 
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40vh;
+}
+
 

@@ -4,7 +4,6 @@ import {createBrowserHistory} from 'history';
 import moment from 'moment';
 import '../../css/style.css'
 import axiosInstance from '../../axios';
-import Header from '../header/header';
 import { Task } from '../../modalClass/Task';
 import TaskForm from '../../common/taskForm';
 

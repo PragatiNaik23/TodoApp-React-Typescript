@@ -3,7 +3,6 @@ import Modal from "react-modal";
 import {createBrowserHistory} from 'history';
 import "../../css/style.css";
 import axiosInstance from '../../axios';
-import Header from '../header/header';
 import { User } from '../../modalClass/user';
 
 
