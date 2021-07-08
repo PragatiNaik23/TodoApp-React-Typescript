@@ -1,4 +1,4 @@
-import  { ChangeEvent, createContext, FC, useState} from 'react';
+import  { ChangeEvent, FC, useState} from 'react';
 import Modal from "react-modal";
 import {createBrowserHistory} from 'history';
 import "../../css/form.scss";
@@ -7,8 +7,9 @@ import { User } from '../../modalClass/user';
 import React from 'react';
 
 
-export const history = createBrowserHistory({forceRefresh:true});
-// export let user: string
+export const HISTORY = createBrowserHistory({forceRefresh:true});
+declare let user: string
+
 
 
 let userDetail : Array<User>
@@ -84,10 +85,10 @@ const Login: FC = () => {
             })
 
             console.log("Go to Task Listing Page");
-             window.localStorage.setItem('username', loginData.username)
-            // user = loginData.username
+            window.localStorage.setItem('username', loginData.username)
+            user = loginData.username
             
-            history.push('/listing')
+            HISTORY.push('/listing')
             }
             else{
                 setPassword({

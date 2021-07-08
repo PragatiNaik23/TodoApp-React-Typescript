@@ -11,10 +11,10 @@ import currentUser from "../../utils/context";
 import React from "react";
 
 
-export const history = createBrowserHistory({forceRefresh:true});
+export const HISTORY = createBrowserHistory({forceRefresh:true});
 
 let taskList: Array<Task>
-let taskgrp1:  Task[] = [], taskgrp2:  Task[] = [], taskgrp3: Task[] = []
+let taskGrp1:  Task[] = [], taskGrp2:  Task[] = [], taskGrp3: Task[] = []
 let taskGrp1Ids:  string[] = [], taskGrp2Ids: string[] = [], taskGrp3Ids: string[] = []
 let header1: string, header2: string, header3: string
 
@@ -72,95 +72,95 @@ const TaskListing: FC = () => {
 
 
     const sortTaskByStatus = () => {
-        taskgrp1 = []
-        taskgrp2 =[]
-        taskgrp3=[]
+        taskGrp1 = []
+        taskGrp2 =[]
+        taskGrp3=[]
         header1 = "New"
         header2 = "In Progress"
         header3 = "Completed"
         for(let task in taskList){
             if(taskList[task].status === "New"){
-                taskgrp1.push(taskList[task])
+                taskGrp1.push(taskList[task])
                  taskGrp1Ids.push(task)
             } else if(taskList[task].status === "In-Progress"){
-                taskgrp2.push(taskList[task])
+                taskGrp2.push(taskList[task])
                 taskGrp2Ids.push(task)
             } else{
-                taskgrp3.push(taskList[task])
+                taskGrp3.push(taskList[task])
                 taskGrp3Ids.push(task)
             }
         }
         
-        console.log("new", taskgrp1)
-        console.log("In-Progress", taskgrp2)
-        console.log("completed",taskgrp3)
+        console.log("new", taskGrp1)
+        console.log("In-Progress", taskGrp2)
+        console.log("completed",taskGrp3)
         
         setstatusTaskLen({
-            newLen: taskgrp1.length,
-            inProgressLen: taskgrp2.length,
-            completedLen: taskgrp3.length
+            newLen: taskGrp1.length,
+            inProgressLen: taskGrp2.length,
+            completedLen: taskGrp3.length
         })
     }
 
     const sortTaskByPriority = () => {
-        taskgrp1 = []
-        taskgrp2 = []
-        taskgrp3 =[]
+        taskGrp1 = []
+        taskGrp2 = []
+        taskGrp3 =[]
         header1 = "Low"
         header2 = "Medium"
         header3 = "High"
         for(let task in taskList){
             if(taskList[task].priority === "Low"){
-                taskgrp1.push(taskList[task])
+                taskGrp1.push(taskList[task])
                 taskGrp1Ids.push(task)
             } else if(taskList[task].priority === "Medium"){
-                taskgrp2.push(taskList[task])
+                taskGrp2.push(taskList[task])
                 taskGrp2Ids.push(task)
             } else{
-                taskgrp3.push(taskList[task])
+                taskGrp3.push(taskList[task])
                 taskGrp3Ids.push(task)
             }
         }
 
-        console.log("low", taskgrp1)
-        console.log("medium", taskgrp2)
-        console.log("high",taskgrp3) 
+        console.log("low", taskGrp1)
+        console.log("medium", taskGrp2)
+        console.log("high",taskGrp3) 
 
         setstatusTaskLen({
-            newLen: taskgrp1.length,
-            inProgressLen: taskgrp2.length,
-            completedLen: taskgrp3.length
+            newLen: taskGrp1.length,
+            inProgressLen: taskGrp2.length,
+            completedLen: taskGrp3.length
         })
     }
 
     const sortTaskByType = () => {
-        taskgrp1 = []
-        taskgrp2 = []
-        taskgrp3 = []
+        taskGrp1 = []
+        taskGrp2 = []
+        taskGrp3 = []
         header1 = "Personal"
         header2 = "Work"
         header3 = "Miscellaneous"
         for(let task in taskList){
             if(taskList[task].type === "Personal"){
-                taskgrp1.push(taskList[task])
+                taskGrp1.push(taskList[task])
                 taskGrp1Ids.push(task)
             } else if(taskList[task].type === "Work"){
-                taskgrp2.push(taskList[task])
+                taskGrp2.push(taskList[task])
                 taskGrp2Ids.push(task)
             } else{
-                taskgrp3.push(taskList[task])
+                taskGrp3.push(taskList[task])
                 taskGrp3Ids.push(task)
             }
         }
 
-        console.log("personal", taskgrp1)
-        console.log("work", taskgrp2)
-        console.log("miscellaneous",taskgrp3)
+        console.log("personal", taskGrp1)
+        console.log("work", taskGrp2)
+        console.log("miscellaneous",taskGrp3)
 
         setstatusTaskLen({
-            newLen: taskgrp1.length,
-            inProgressLen: taskgrp2.length,
-            completedLen: taskgrp3.length
+            newLen: taskGrp1.length,
+            inProgressLen: taskGrp2.length,
+            completedLen: taskGrp3.length
         })
     }
 
@@ -210,15 +210,15 @@ const TaskListing: FC = () => {
                                                                 options.push(<div>
                                                                     <Card 
                                                                         uId = {taskGrp1Ids[i]}
-                                                                        id = {taskgrp1[i].id}
-                                                                        title = {taskgrp1[i].title}
-                                                                        dueDate = {taskgrp1[i].dueDate}
-                                                                        status = {taskgrp1[i].status}
-                                                                        description = {taskgrp1[i].description}
-                                                                        type = {taskgrp1[i].type}
-                                                                        priority = {taskgrp1[i].priority}
-                                                                        createdDate = {taskgrp1[i].createdDate}
-                                                                        comments = {taskgrp1[i].comments}
+                                                                        id = {taskGrp1[i].id}
+                                                                        title = {taskGrp1[i].title}
+                                                                        dueDate = {taskGrp1[i].dueDate}
+                                                                        status = {taskGrp1[i].status}
+                                                                        description = {taskGrp1[i].description}
+                                                                        type = {taskGrp1[i].type}
+                                                                        priority = {taskGrp1[i].priority}
+                                                                        createdDate = {taskGrp1[i].createdDate}
+                                                                        comments = {taskGrp1[i].comments}
                                                                     ></Card>
                                                                 </div>);
                                                             }
@@ -232,15 +232,15 @@ const TaskListing: FC = () => {
                                                                 options.push(<div>
                                                                     <Card 
                                                                         uId = {taskGrp2Ids[i]}
-                                                                        id = {taskgrp2[i].id}
-                                                                        title = {taskgrp2[i].title}
-                                                                        dueDate = {taskgrp2[i].dueDate}
-                                                                        status = {taskgrp2[i].status}
-                                                                        description = {taskgrp2[i].description}
-                                                                        type = {taskgrp2[i].type}
-                                                                        priority = {taskgrp2[i].priority}
-                                                                        createdDate = {taskgrp2[i].createdDate}
-                                                                        comments = {taskgrp2[i].comments}
+                                                                        id = {taskGrp2[i].id}
+                                                                        title = {taskGrp2[i].title}
+                                                                        dueDate = {taskGrp2[i].dueDate}
+                                                                        status = {taskGrp2[i].status}
+                                                                        description = {taskGrp2[i].description}
+                                                                        type = {taskGrp2[i].type}
+                                                                        priority = {taskGrp2[i].priority}
+                                                                        createdDate = {taskGrp2[i].createdDate}
+                                                                        comments = {taskGrp2[i].comments}
                                                                         ></Card>
                                                                 </div>);
                                                             }
@@ -254,15 +254,15 @@ const TaskListing: FC = () => {
                                                                 options.push(<div>
                                                                     <Card 
                                                                         uId = {taskGrp3Ids[i]}
-                                                                        id = {taskgrp3[i].id}
-                                                                        title = {taskgrp3[i].title}
-                                                                        dueDate = {taskgrp3[i].dueDate}
-                                                                        status = {taskgrp3[i].status}
-                                                                        description = {taskgrp3[i].description}
-                                                                        type = {taskgrp3[i].type}
-                                                                        priority = {taskgrp3[i].priority}
-                                                                        createdDate = {taskgrp3[i].createdDate}
-                                                                        comments = {taskgrp3[i].comments}
+                                                                        id = {taskGrp3[i].id}
+                                                                        title = {taskGrp3[i].title}
+                                                                        dueDate = {taskGrp3[i].dueDate}
+                                                                        status = {taskGrp3[i].status}
+                                                                        description = {taskGrp3[i].description}
+                                                                        type = {taskGrp3[i].type}
+                                                                        priority = {taskGrp3[i].priority}
+                                                                        createdDate = {taskGrp3[i].createdDate}
+                                                                        comments = {taskGrp3[i].comments}
                                                                         ></Card>
                                                                 </div>);
                                                             }

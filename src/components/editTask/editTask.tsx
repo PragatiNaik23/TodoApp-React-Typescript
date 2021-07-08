@@ -6,7 +6,7 @@ import axiosInstance from '../../axios';
 import TaskForm from "../../common/taskForm";
 
 
-export const history = createBrowserHistory({forceRefresh:true});
+export const HISTORY = createBrowserHistory({forceRefresh:true});
 
 interface ParentCompProps {
     uId: string | undefined;
@@ -74,7 +74,7 @@ const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,descripti
         axiosInstance.patch(`/users/${username}/Task/${uId}.json`, editTask)
         .then(response => {
             console.log(response);
-            history.replace('/listing')
+            HISTORY.replace('/listing')
         })
         .catch(error => {
             console.log(error)

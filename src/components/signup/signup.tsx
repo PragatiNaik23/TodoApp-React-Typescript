@@ -6,7 +6,7 @@ import axiosInstance from '../../axios';
 import { User } from '../../modalClass/user';
 
 
-export const history = createBrowserHistory({forceRefresh:true});
+export const HISTORY = createBrowserHistory({forceRefresh:true});
 
 let userList: Array<User>
 let usernameList: string[] = []
@@ -70,7 +70,7 @@ const Signup: FC = () => {
                 exist: false
             })
             console.log("Go to Login")
-            history.push('/')
+            HISTORY.push('/')
         })
         .catch(error => {
             console.log(error)

@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import Login, { user } from './components/login/login';
+import Login from './components/login/login';
 import Signup from './components/signup/signup'
 import EditTask from "./components/editTask/editTask";
 import CreateTask from "./components/createTask/createTask";
@@ -10,7 +10,7 @@ import currentUser from "./utils/context";
 
 
 const AppRouter: FC = () => {
-//    console.log("route",user)
+//    console.log("route",)
     return(
         <Router>
             <Switch >

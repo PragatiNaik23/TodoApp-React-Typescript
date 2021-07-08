@@ -9,7 +9,7 @@ import TaskForm from '../../common/taskForm';
 import { useEffect } from 'react';
 
 
-export const history = createBrowserHistory({forceRefresh:true});
+export const HISTORY = createBrowserHistory({forceRefresh:true});
 
 let taskList: Array<Task>
 let idList: number[] = []
@@ -109,7 +109,7 @@ const CreateTask: FC = () => {
         .then(response => {
             //console.log(response)
             console.log("Go to Task Listing Page")
-            history.push('/listing')
+            HISTORY.push('/listing')
         })
         .catch(error => {
             console.log(error)

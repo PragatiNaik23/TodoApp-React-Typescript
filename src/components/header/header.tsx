@@ -4,15 +4,15 @@ import {createBrowserHistory} from 'history';
 import logo from '../../images/logo.png'
 import '../../css/header.scss'
 
-export const history = createBrowserHistory({forceRefresh:true});
+export const HISTORY = createBrowserHistory({forceRefresh:true});
 
 const Header: FC = () => {
 
-    const urlPath = useLocation()
+    const URL_PATH = useLocation()
 
     const logout = (e: React.SyntheticEvent) => {
         e.preventDefault()
-        history.push('/')
+        HISTORY.push('/')
         console.log("Before",window.localStorage.getItem('username'))
         localStorage.clear()
         console.log("After",window.localStorage.getItem('username'))
@@ -24,23 +24,23 @@ const Header: FC = () => {
                 <div className="container-fluid">
                     <img className="logo" src={logo} alt="logo" />
                     <ul className="navbar-nav ml-auto nav"> 
-                        {urlPath.pathname === '/' ? (
+                        {URL_PATH.pathname === '/' ? (
                             <li className="navbar-nav ml-auto">
-                                <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={() => {history.push('/signup')}}>Sign Up</button>
+                                <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={() => {HISTORY.push('/signup')}}>Sign Up</button>
                             </li>
-                        ) : (urlPath.pathname === '/signup' ? (
+                        ) : (URL_PATH.pathname === '/signup' ? (
                             <li className="navbar-nav ml-auto">
-                                <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={() => {history.push('/')}}>Login</button>
+                                <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={() => {HISTORY.push('/')}}>Login</button>
                             </li>
-                        ) : (urlPath.pathname === '/listing' ? (
+                        ) : (URL_PATH.pathname === '/listing' ? (
                             <li className="navbar-nav ml-auto">
                                 <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={logout}>Logout</button>
-                                <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={() => {history.push('/create')}}>Create Task</button>
+                                <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={() => {HISTORY.push('/create')}}>Create Task</button>
                             </li>
-                        ) : (urlPath.pathname === '/create' ? (
+                        ) : (URL_PATH.pathname === '/create' ? (
                             <li className="navbar-nav ml-auto">
                                 <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={logout}>Logout</button>
-                                <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={() => {history.push('/listing')}}>Tasks</button>
+                                <button type="submit" className="btn btn-primary btn-lg ml-lg-5" onClick={() => {HISTORY.push('/listing')}}>Tasks</button>
                             </li>
                         ) : (null))))
                         }
