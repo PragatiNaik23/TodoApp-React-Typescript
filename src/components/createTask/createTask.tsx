@@ -6,6 +6,7 @@ import '../../css/style.css'
 import axiosInstance from '../../axios';
 import { Task } from '../../modalClass/Task';
 import TaskForm from '../../common/taskForm';
+import { useEffect } from 'react';
 
 
 export const history = createBrowserHistory({forceRefresh:true});
@@ -19,8 +20,17 @@ const CreateTask: FC = () => {
     let datestring = ('0' + date.getDate()).slice(-2)  + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + date.getFullYear();
     let today = moment(datestring).toDate()
 
-
     let username = window.localStorage.getItem('username')
+
+    useEffect(() => {
+        axiosInstance.get(`/users/${username}/Task.json`)
+        .then(response => {
+            console.log(response.data)
+            taskList = response.data
+            console.log(taskList)
+        })
+        .catch(error => console.log(error))
+    })
 
     const [createTaskData, setCreateTaskData] = useState<Task>({
         id: 0,
@@ -71,17 +81,8 @@ const CreateTask: FC = () => {
                       createTaskData.priority !== '' &&
                       createTaskData.dueDate !== undefined;
 
-    const checkTaskId = async (e: React.SyntheticEvent) => {
+    const checkTaskId = (e: React.SyntheticEvent) => {
         e.preventDefault()
-        await axiosInstance.get(`/users/${username}/Task.json`)
-        .then(response => {
-            console.log(response.data)
-            taskList = response.data
-            console.log(taskList)
-        })
-        .catch(error => console.log(error))
-
-
         if(taskList !== null){
             for(let task in taskList){
                 idList.push(taskList[task].id as number)

@@ -11,7 +11,6 @@ import { Task } from "../../modalClass/Task";
 
 export const history = createBrowserHistory({forceRefresh:true});
 
-
 let taskList: Array<Task>
 let taskgrp1:  Task[] = [], taskgrp2:  Task[] = [], taskgrp3: Task[] = []
 let taskGrp1Ids:  string[] = [], taskGrp2Ids: string[] = [], taskGrp3Ids: string[] = []
