@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FC } from "react";
+import '../css/form.scss'
 
 interface ParentCompProps {
     id:number | undefined;
@@ -24,7 +25,7 @@ const TaskForm:FC<ParentCompProps> = (
         isEnabled,inputData,textareaData,selectData, submit, dupId, createTask}
     ) => {
     return(
-        <form className="form" id="formcreatetask" onSubmit={submit}>
+        <form onSubmit={submit}>
             {createTask === false ? (
             <div className="form-group mt-2">
                 <label><b>Id<small className="text-danger"><b>*</b></small></b></label>

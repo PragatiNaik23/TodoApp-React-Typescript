@@ -1,18 +1,21 @@
-import  { ChangeEvent, FC, useState} from 'react';
+import  { ChangeEvent, createContext, FC, useState} from 'react';
 import Modal from "react-modal";
 import {createBrowserHistory} from 'history';
-import "../../css/style.css";
+import "../../css/form.scss";
 import axiosInstance from '../../axios';
 import { User } from '../../modalClass/user';
-
-
+import React from 'react';
 
 
 export const history = createBrowserHistory({forceRefresh:true});
+// export let user: string
+
 
 let userDetail : Array<User>
 
 const Login: FC = () => {
+    // const name = React.useContext(currentUser)
+    // console.log(name)
 
     const [loginData, setLoginData] = useState({
         username: '',
@@ -79,8 +82,11 @@ const Login: FC = () => {
             setPassword({
                 correct: true
             })
+
             console.log("Go to Task Listing Page");
-            window.localStorage.setItem('username', loginData.username)
+             window.localStorage.setItem('username', loginData.username)
+            // user = loginData.username
+            
             history.push('/listing')
             }
             else{
@@ -93,6 +99,8 @@ const Login: FC = () => {
 
     return (
         <div>
+
+
             <Modal
             isOpen={isOpen}
             onRequestClose={toggleModal}
@@ -106,13 +114,13 @@ const Login: FC = () => {
             <button type="submit"  className="btn btn-success btn-lg mt-3" id="btnLogin" onClick={toggleModal}>Close</button>
             </Modal>
 
-            <div className="container col-lg-5 login">
+            <div className="container col-lg-5 form">
                 <div className="card rounded-2 shadow shadow-sm">
-                    <div className="card-header" id="loginHeader">
+                    <div className="card-header" id="header">
                         <h3 className="mb-0 text-center text-white">Login</h3>
                     </div>
                     <div className="card-body">
-                        <form className="form" onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit}>
                             {usernameExist.exist === false ? (
                                 <div className="form-group">
                                     <input type="text" className="form-control form-control-lg rounded-2" onChange={inputData} name="username" placeholder="Username" required/>
@@ -132,7 +140,7 @@ const Login: FC = () => {
                                         <input type="password" className="form-control form-control-lg rounded-2"  onChange={inputData} name="password" placeholder="Password" required/>
                                     </div>
                                 )}
-                            <button type="submit" className="btn btn-success btn-lg" id="btnLogin">Login</button>
+                            <button type="submit" className="btn btn-success btn-lg">Login</button>
                         </form>
                     </div>
                 </div>

@@ -2,7 +2,7 @@ import React, { FC} from "react";
 import { useLocation} from 'react-router-dom'
 import {createBrowserHistory} from 'history';
 import logo from '../../images/logo.png'
-import '../../css/header.css'
+import '../../css/header.scss'
 
 export const history = createBrowserHistory({forceRefresh:true});
 

@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import Modal from "react-modal";
-import '../../css/style.css';
+import '../../css/card.scss';
 import '../../css/modal.css';
 import EditTask from "../editTask/editTask";
 
@@ -97,7 +97,7 @@ const Card: FC<ParentCompProps> = ({uId, id, title, dueDate, status,description,
                     <div className="row d-flex justify-content-start mt-1">
                         Comments:{comments}
                     </div>
-                    <button id="editBtn" className="editbtn btn btn-danger mt-3 col-md-4 text-center center" onClick={toggleModal}>Edit</button>
+                    <button className="editbtn btn btn-danger mt-3 col-md-4 text-center center" onClick={toggleModal}>Edit</button>
                     <Modal
                         isOpen={isOpen}
                         onRequestClose={toggleModal}

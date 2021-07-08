@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC, useState } from "react"
 import Modal from "react-modal";
 import {createBrowserHistory} from 'history';
-import '../../css/style.css'
+import '../../css/form.scss'
 import axiosInstance from '../../axios';
 import TaskForm from "../../common/taskForm";
 
@@ -97,7 +97,7 @@ const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,descripti
             <button type="submit"  className="btn btn-success btn-lg mt-3" id="btnLogin" onClick={toggleModal}>Close</button>
             </Modal>
             <div>
-                <div className="card-header" id = "loginHeader" >
+                <div className="card-header" id = "header" >
                     <h3 className="mb-0 text-center text-white" >Edit Your Task</h3>
                 </div>
                 <TaskForm 

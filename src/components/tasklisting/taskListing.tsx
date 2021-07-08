@@ -3,10 +3,12 @@ import {usePromiseTracker, trackPromise} from 'react-promise-tracker';
 import Loader from "react-loader-spinner";
 import {createBrowserHistory} from 'history';
 import tick from '../../images/tick.png';
-import '../../css/style.css';
+import '../../css/listing.scss';
 import axiosInstance from '../../axios';
 import Card from './card';
 import { Task } from "../../modalClass/Task";
+import currentUser from "../../utils/context";
+import React from "react";
 
 
 export const history = createBrowserHistory({forceRefresh:true});
@@ -19,6 +21,9 @@ let header1: string, header2: string, header3: string
 const TaskListing: FC = () => {
 
     let username = window.localStorage.getItem('username')
+
+     const name = React.useContext(currentUser)
+    console.log("name",name)
 
     const [groupBy, setGroupBy] = useState({
         group: 'status'

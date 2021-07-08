@@ -2,7 +2,7 @@ import React, {ChangeEvent, FC, useState} from 'react'
 import Modal from "react-modal";
 import {createBrowserHistory} from 'history';
 import moment from 'moment';
-import '../../css/style.css'
+import '../../css/form.scss'
 import axiosInstance from '../../axios';
 import { Task } from '../../modalClass/Task';
 import TaskForm from '../../common/taskForm';
@@ -131,9 +131,9 @@ const CreateTask: FC = () => {
             <h6>Check your internet connection</h6>
             <button type="submit"  className="btn btn-success btn-lg mt-3" id="btnLogin" onClick={toggleModal}>Close</button>
             </Modal>
-            <div className="container col-lg-5 login">
+            <div className="container col-lg-5 form">
                 <div className="card rounded-2 shadow shadow-sm">
-                    <div className="card-header" id = "loginHeader" >
+                    <div className="card-header" id="header" >
                         <h3 className="mb-0 text-center text-white">Create Task</h3>
                     </div>
                     <div className="card-body">
