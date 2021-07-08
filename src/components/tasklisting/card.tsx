@@ -29,19 +29,19 @@ const Card: FC<ParentCompProps> = ({uId, id, title, dueDate, status,description,
     }
 
     if(priority === "Low"){
-        Pclasses = "text-primary"
+        Pclasses = "text-danger"
     } else if(priority === "Medium"){
         Pclasses = "text-warning" 
     } else{
-        Pclasses = "text-danger"
+        Pclasses = "text-primary"
     }
 
     if(type === "Personal"){
-        Tclasses = "text-primary"
-    } else if(type === "Work"){
         Tclasses = "text-danger"
-    } else{
+    } else if(type === "Work"){
         Tclasses = "text-warning"
+    } else{
+        Tclasses = "text-primary"
     }
 
     const [isOpen, setIsOpen] = useState(false);

@@ -13,12 +13,9 @@ export const history = createBrowserHistory({forceRefresh:true});
 
 
 let taskList: Array<Task>
-let newTask:  Task[] = [], inProgressTask:  Task[] = [], completedtask: Task[] = []
-let newTaskIds:  string[] = [], inProgressTaskIds: string[] = [], completedtaskIds: string[] = []
-let lowTask: Task[] = [], mediumTask: Task[] = [], highTask: Task[] = []
-let lowTaskIds: string[] = [], mediumTaskIds: string[] = [], highTaskIds: string[] = []
-let personalTask: Task[] = [], workTask: Task[] = [], miscellaneousTask: Task[] = []
-let personalTaskIds: string[] = [], workTaskIds: string[] = [], miscellaneousTaskIds: string[] = []
+let taskgrp1:  Task[] = [], taskgrp2:  Task[] = [], taskgrp3: Task[] = []
+let taskGrp1Ids:  string[] = [], taskGrp2Ids: string[] = [], taskGrp3Ids: string[] = []
+let header1: string, header2: string, header3: string
 
 const TaskListing: FC = () => {
 
@@ -35,12 +32,6 @@ const TaskListing: FC = () => {
         })
         e.target.value === "status" ? (sortTaskByStatus()) : (e.target.value === "priority" ? sortTaskByPriority() : sortTaskByType())
     }
-
-    const [headers, setHeaders] = useState({
-        statusHeader: true,
-        priorityHeader: false,
-        typeHeader: false
-    })
 
     const [statusTaskLen, setstatusTaskLen] = useState({
         newLen: 0,
@@ -77,92 +68,95 @@ const TaskListing: FC = () => {
 
 
     const sortTaskByStatus = () => {
-        newTask = []
-        inProgressTask =[]
-        completedtask=[]
+        taskgrp1 = []
+        taskgrp2 =[]
+        taskgrp3=[]
+        header1 = "New"
+        header2 = "In Progress"
+        header3 = "Completed"
         for(let task in taskList){
             if(taskList[task].status === "New"){
-                 newTask.push(taskList[task])
-                 newTaskIds.push(task)
+                taskgrp1.push(taskList[task])
+                 taskGrp1Ids.push(task)
             } else if(taskList[task].status === "In-Progress"){
-                inProgressTask.push(taskList[task])
-                inProgressTaskIds.push(task)
+                taskgrp2.push(taskList[task])
+                taskGrp2Ids.push(task)
             } else{
-                completedtask.push(taskList[task])
-                completedtaskIds.push(task)
+                taskgrp3.push(taskList[task])
+                taskGrp3Ids.push(task)
             }
         }
         
-        console.log("new", newTask)
-        console.log("In-Progress", inProgressTask)
-        console.log("completed",completedtask)
+        console.log("new", taskgrp1)
+        console.log("In-Progress", taskgrp2)
+        console.log("completed",taskgrp3)
         
         setstatusTaskLen({
-            newLen: newTask.length,
-            inProgressLen: inProgressTask.length,
-            completedLen: completedtask.length
-        })
-
-        setHeaders({
-            statusHeader: true,
-            priorityHeader: false,
-            typeHeader: false
+            newLen: taskgrp1.length,
+            inProgressLen: taskgrp2.length,
+            completedLen: taskgrp3.length
         })
     }
 
     const sortTaskByPriority = () => {
-        lowTask = []
-        mediumTask = []
-        highTask =[]
+        taskgrp1 = []
+        taskgrp2 = []
+        taskgrp3 =[]
+        header1 = "Low"
+        header2 = "Medium"
+        header3 = "High"
         for(let task in taskList){
             if(taskList[task].priority === "Low"){
-                lowTask.push(taskList[task])
-                lowTaskIds.push(task)
+                taskgrp1.push(taskList[task])
+                taskGrp1Ids.push(task)
             } else if(taskList[task].priority === "Medium"){
-                mediumTask.push(taskList[task])
-                mediumTaskIds.push(task)
+                taskgrp2.push(taskList[task])
+                taskGrp2Ids.push(task)
             } else{
-                highTask.push(taskList[task])
-                highTaskIds.push(task)
+                taskgrp3.push(taskList[task])
+                taskGrp3Ids.push(task)
             }
         }
 
-        console.log("low", lowTask)
-        console.log("medium", mediumTask)
-        console.log("high",highTask) 
+        console.log("low", taskgrp1)
+        console.log("medium", taskgrp2)
+        console.log("high",taskgrp3) 
 
-        setHeaders({
-            statusHeader: false,
-            priorityHeader: true,
-            typeHeader: false
+        setstatusTaskLen({
+            newLen: taskgrp1.length,
+            inProgressLen: taskgrp2.length,
+            completedLen: taskgrp3.length
         })
     }
 
     const sortTaskByType = () => {
-        personalTask = []
-        workTask = []
-        miscellaneousTask = []
+        taskgrp1 = []
+        taskgrp2 = []
+        taskgrp3 = []
+        header1 = "Personal"
+        header2 = "Work"
+        header3 = "Miscellaneous"
         for(let task in taskList){
             if(taskList[task].type === "Personal"){
-                personalTask.push(taskList[task])
-                personalTaskIds.push(task)
+                taskgrp1.push(taskList[task])
+                taskGrp1Ids.push(task)
             } else if(taskList[task].type === "Work"){
-                workTask.push(taskList[task])
-                workTaskIds.push(task)
+                taskgrp2.push(taskList[task])
+                taskGrp2Ids.push(task)
             } else{
-                miscellaneousTask.push(taskList[task])
-                miscellaneousTaskIds.push(task)
+                taskgrp3.push(taskList[task])
+                taskGrp3Ids.push(task)
             }
         }
 
-        console.log("personal", personalTask)
-        console.log("work", workTask)
-        console.log("miscellaneous",miscellaneousTask)
+        console.log("personal", taskgrp1)
+        console.log("work", taskgrp2)
+        console.log("miscellaneous",taskgrp3)
 
-        setHeaders({
-            statusHeader: false,
-            priorityHeader: false,
-            typeHeader: true
+        setstatusTaskLen({
+            newLen: taskgrp1.length,
+            inProgressLen: taskgrp2.length,
+            completedLen: taskgrp3.length
         })
     }
 
@@ -196,244 +190,84 @@ const TaskListing: FC = () => {
                                     </select>
                                     {(() => {
                                         const html = [];
-                                        if(headers.statusHeader === true){
-                                            html.push(
-                                                <div id="displaystatus">
+                                        html.push(
+                                            <div>
                                                 <div className="row justify-content-around mt-5" >
-                                                    <h5 className="text-danger"><b>New</b></h5>
-                                                    <h5 className="text-warning"><b>In Progress</b></h5>
-                                                    <h5 className="text-primary"><b>Completed</b></h5>
+                                                    <h5 className="text-danger"><b>{header1}</b></h5>
+                                                    <h5 className="text-warning"><b>{header2}</b></h5>
+                                                    <h5 className="text-primary"><b>{header3}</b></h5>
                                                 </div>
                                                 <hr></hr>
-                                                <div className="row justify-content-around mt-3" id = "statusListParent">
-                                                    <div className="col" id="newList">
+                                                <div className="row justify-content-around mt-3">
+                                                    <div className="col">
                                                         {(() => {
                                                             const options = [];
                                                             for (let i = 0 ; i< statusTaskLen.newLen; i++) {
                                                                 options.push(<div>
                                                                     <Card 
-                                                                        uId = {newTaskIds[i]}
-                                                                        id = {newTask[i].id}
-                                                                        title = {newTask[i].title}
-                                                                        dueDate = {newTask[i].dueDate}
-                                                                        status = {newTask[i].status}
-                                                                        description = {newTask[i].description}
-                                                                        type = {newTask[i].type}
-                                                                        priority = {newTask[i].priority}
-                                                                        createdDate = {newTask[i].createdDate}
-                                                                        comments = {newTask[i].comments}
+                                                                        uId = {taskGrp1Ids[i]}
+                                                                        id = {taskgrp1[i].id}
+                                                                        title = {taskgrp1[i].title}
+                                                                        dueDate = {taskgrp1[i].dueDate}
+                                                                        status = {taskgrp1[i].status}
+                                                                        description = {taskgrp1[i].description}
+                                                                        type = {taskgrp1[i].type}
+                                                                        priority = {taskgrp1[i].priority}
+                                                                        createdDate = {taskgrp1[i].createdDate}
+                                                                        comments = {taskgrp1[i].comments}
                                                                     ></Card>
                                                                 </div>);
                                                             }
                                                             return options;
                                                         })()}
                                                     </div>
-                                                    <div className="col" id="progressList">
-                                                    {(() => {
-                                                        const options = [];
-                                                        for (let i = 0 ; i< statusTaskLen.inProgressLen; i++) {
-                                                            options.push(<div>
-                                                                <Card 
-                                                                    uId = {inProgressTaskIds[i]}
-                                                                    id = {inProgressTask[i].id}
-                                                                    title = {inProgressTask[i].title}
-                                                                    dueDate = {inProgressTask[i].dueDate}
-                                                                    status = {inProgressTask[i].status}
-                                                                    description = {inProgressTask[i].description}
-                                                                    type = {inProgressTask[i].type}
-                                                                    priority = {inProgressTask[i].priority}
-                                                                    createdDate = {inProgressTask[i].createdDate}
-                                                                    comments = {inProgressTask[i].comments}
-                                                                    ></Card>
-                                                            </div>);
-                                                        }
-                                                        return options;
-                                                    })()}
+                                                    <div className="col">
+                                                        {(() => {
+                                                            const options = [];
+                                                            for (let i = 0 ; i< statusTaskLen.inProgressLen; i++) {
+                                                                options.push(<div>
+                                                                    <Card 
+                                                                        uId = {taskGrp2Ids[i]}
+                                                                        id = {taskgrp2[i].id}
+                                                                        title = {taskgrp2[i].title}
+                                                                        dueDate = {taskgrp2[i].dueDate}
+                                                                        status = {taskgrp2[i].status}
+                                                                        description = {taskgrp2[i].description}
+                                                                        type = {taskgrp2[i].type}
+                                                                        priority = {taskgrp2[i].priority}
+                                                                        createdDate = {taskgrp2[i].createdDate}
+                                                                        comments = {taskgrp2[i].comments}
+                                                                        ></Card>
+                                                                </div>);
+                                                            }
+                                                            return options;
+                                                        })()}
                                                     </div>
-                                                    <div className="col" id="completedList">
-                                                    {(() => {
-                                                        const options = [];
-                                                        for (let i = 0 ; i< statusTaskLen.completedLen; i++) {
-                                                            options.push(<div>
-                                                                <Card 
-                                                                    uId = {completedtaskIds[i]}
-                                                                    id = {completedtask[i].id}
-                                                                    title = {completedtask[i].title}
-                                                                    dueDate = {completedtask[i].dueDate}
-                                                                    status = {completedtask[i].status}
-                                                                    description = {completedtask[i].description}
-                                                                    type = {completedtask[i].type}
-                                                                    priority = {completedtask[i].priority}
-                                                                    createdDate = {completedtask[i].createdDate}
-                                                                    comments = {completedtask[i].comments}
-                                                                    ></Card>
-                                                            </div>);
-                                                        }
-                                                        return options;
-                                                    })()}
-                                                    </div>
-                                                </div>
-                                            </div>)
-                                            return html;
-                                        } else if(headers.priorityHeader === true){
-                                            html.push(
-                                                <div id="displaypriority">
-                                                <div className="row justify-content-around mt-5">
-                                                    <h5 className="text-primary"><b>Low</b></h5>
-                                                    <h5 className="text-warning"><b>Medium</b></h5>
-                                                    <h5 className="text-danger"><b>High</b></h5>
-                                                </div>
-                                                <hr></hr>
-                                                <div className="row justify-content-around mt-3" id = "priorityListParent">
-                                                    <div className="col" id="lowList">
-                                                    {(() => {
-                                                        const options = [];
-                                                        for (let i = 0 ; i< lowTask.length; i++) {
-                                                            options.push(<div>
-                                                                <Card 
-                                                                    uId = {lowTaskIds[i]}
-                                                                    id = {lowTask[i].id}
-                                                                    title = {lowTask[i].title}
-                                                                    dueDate = {lowTask[i].dueDate}
-                                                                    status = {lowTask[i].status}
-                                                                    description = {lowTask[i].description}
-                                                                    type = {lowTask[i].type}
-                                                                    priority = {lowTask[i].priority}
-                                                                    createdDate = {lowTask[i].createdDate}
-                                                                    comments = {lowTask[i].comments}
-                                                                    ></Card>
-                                                            </div>);
-                                                        }
-                                                        return options;
-                                                    })()}
-                                                    </div>
-                                                    <div className="col" id="mediumList">
-                                                    {(() => {
-                                                        const options = [];
-                                                        for (let i = 0 ; i< mediumTask.length; i++) {
-                                                            options.push(<div>
-                                                                <Card 
-                                                                    uId = {mediumTaskIds[i]}
-                                                                    id = {mediumTask[i].id}
-                                                                    title = {mediumTask[i].title}
-                                                                    dueDate = {mediumTask[i].dueDate}
-                                                                    status = {mediumTask[i].status}
-                                                                    description = {mediumTask[i].description}
-                                                                    type = {mediumTask[i].type}
-                                                                    priority = {mediumTask[i].priority}
-                                                                    createdDate = {mediumTask[i].createdDate}
-                                                                    comments = {mediumTask[i].comments}
-                                                                    ></Card>
-                                                            </div>);
-                                                        }
-                                                        return options;
-                                                    })()}
-                                                    </div>
-                                                    <div className="col" id="highList">
-                                                    {(() => {
-                                                        const options = [];
-                                                        for (let i = 0 ; i< highTask.length; i++) {
-                                                            options.push(<div>
-                                                                <Card 
-                                                                    uId = {highTaskIds[i]}
-                                                                    id = {highTask[i].id}
-                                                                    title = {highTask[i].title}
-                                                                    dueDate = {highTask[i].dueDate}
-                                                                    status = {highTask[i].status}
-                                                                    description = {highTask[i].description}
-                                                                    type = {highTask[i].type}
-                                                                    priority = {highTask[i].priority}
-                                                                    createdDate = {highTask[i].createdDate}
-                                                                    comments = {highTask[i].comments}
-                                                                    ></Card>
-                                                            </div>);
-                                                        }
-                                                        return options;
-                                                    })()}
+                                                    <div className="col">
+                                                        {(() => {
+                                                            const options = [];
+                                                            for (let i = 0 ; i< statusTaskLen.completedLen; i++) {
+                                                                options.push(<div>
+                                                                    <Card 
+                                                                        uId = {taskGrp3Ids[i]}
+                                                                        id = {taskgrp3[i].id}
+                                                                        title = {taskgrp3[i].title}
+                                                                        dueDate = {taskgrp3[i].dueDate}
+                                                                        status = {taskgrp3[i].status}
+                                                                        description = {taskgrp3[i].description}
+                                                                        type = {taskgrp3[i].type}
+                                                                        priority = {taskgrp3[i].priority}
+                                                                        createdDate = {taskgrp3[i].createdDate}
+                                                                        comments = {taskgrp3[i].comments}
+                                                                        ></Card>
+                                                                </div>);
+                                                            }
+                                                            return options;
+                                                        })()}
                                                     </div>
                                                 </div>
                                             </div>)
-                                            return html;
-                                        } else if(headers.typeHeader === true) {
-                                            html.push(
-                                                <div id="displaytype">
-                                                <div className="row justify-content-around mt-5">
-                                                    <h5 className="text-primary"><b>Personal</b></h5>
-                                                    <h5 className="text-danger"><b>Work</b></h5>
-                                                    <h5 className="text-warning"><b>Miscellaneous</b></h5>
-                                                </div>
-                                                <hr></hr>
-                                                <div className="row justify-content-around mt-3" id = "typeListParent">
-                                                    <div className="col" id="personalList">
-                                                    {(() => {
-                                                        const options = [];
-                                                        for (let i = 0 ; i< personalTask.length; i++) {
-                                                            options.push(<div>
-                                                                <Card 
-                                                                    uId = {personalTaskIds[i]}
-                                                                    id = {personalTask[i].id}
-                                                                    title = {personalTask[i].title}
-                                                                    dueDate = {personalTask[i].dueDate}
-                                                                    status = {personalTask[i].status}
-                                                                    description = {personalTask[i].description}
-                                                                    type = {personalTask[i].type}
-                                                                    priority = {personalTask[i].priority}
-                                                                    createdDate = {personalTask[i].createdDate}
-                                                                    comments = {personalTask[i].comments}
-                                                                    ></Card>
-                                                            </div>);
-                                                        }
-                                                        return options;
-                                                    })()}
-                                                    </div>
-                                                    <div className="col" id="workList">
-                                                    {(() => {
-                                                        const options = [];
-                                                        for (let i = 0 ; i< workTask.length; i++) {
-                                                            options.push(<div>
-                                                                <Card 
-                                                                    uId = {workTaskIds[i]}
-                                                                    id = {workTask[i].id}
-                                                                    title = {workTask[i].title}
-                                                                    dueDate = {workTask[i].dueDate}
-                                                                    status = {workTask[i].status}
-                                                                    description = {workTask[i].description}
-                                                                    type = {workTask[i].type}
-                                                                    priority = {workTask[i].priority}
-                                                                    createdDate = {workTask[i].createdDate}
-                                                                    comments = {workTask[i].comments}
-                                                                    ></Card>
-                                                            </div>);
-                                                        }
-                                                        return options;
-                                                    })()}
-                                                    </div>
-                                                    <div className="col" id="miscellaneousList">
-                                                    {(() => {
-                                                        const options = [];
-                                                        for (let i = 0 ; i< miscellaneousTask.length; i++) {
-                                                            options.push(<div>
-                                                                <Card 
-                                                                    uId = {miscellaneousTaskIds[i]}
-                                                                    id = {miscellaneousTask[i].id}
-                                                                    title = {miscellaneousTask[i].title}
-                                                                    dueDate = {miscellaneousTask[i].dueDate}
-                                                                    status = {miscellaneousTask[i].status}
-                                                                    description = {miscellaneousTask[i].description}
-                                                                    type = {miscellaneousTask[i].type}
-                                                                    priority = {miscellaneousTask[i].priority}
-                                                                    createdDate = {miscellaneousTask[i].createdDate}
-                                                                    comments = {miscellaneousTask[i].comments}
-                                                                    ></Card>
-                                                            </div>);
-                                                        }
-                                                        return options;
-                                                    })()}
-                                                    </div>
-                                                </div>
-                                            </div>)
-                                            return html
-                                        }           
+                                        return html;
                                     })()}
                                 </div>
                             )
