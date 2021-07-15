@@ -1,12 +1,16 @@
-import { FC} from 'react';
+import {FC} from 'react';
 import './App.css';
-import Header from './components/header/header';
+import Routes from './routes'
+import { UserProvider } from './utils/context';
 
 const App: FC = () => {
+
   return (
-    <div className="App">
-      <Header></Header>
-    </div>
+    <UserProvider>
+        <div className="App">
+          <Routes/>
+        </div>
+    </UserProvider>
   );
   
 }

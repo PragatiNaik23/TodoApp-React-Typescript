@@ -1,17 +1,14 @@
-import { ChangeEvent, FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import {usePromiseTracker, trackPromise} from 'react-promise-tracker';
 import Loader from "react-loader-spinner";
-import {createBrowserHistory} from 'history';
 import tick from '../../images/tick.png';
 import '../../css/listing.scss';
 import axiosInstance from '../../axios';
 import Card from './card';
 import { Task } from "../../modalClass/Task";
-import currentUser from "../../utils/context";
-import React from "react";
+import currentUserContext from "../../utils/context";
 
-
-export const HISTORY = createBrowserHistory({forceRefresh:true});
 
 let taskList: Array<Task>
 let taskGrp1:  Task[] = [], taskGrp2:  Task[] = [], taskGrp3: Task[] = []
@@ -20,10 +17,7 @@ let header1: string, header2: string, header3: string
 
 const TaskListing: FC = () => {
 
-    let username = window.localStorage.getItem('username')
-
-     const name = React.useContext(currentUser)
-    console.log("name",name)
+    const username = useContext(currentUserContext)?.username  
 
     const [groupBy, setGroupBy] = useState({
         group: 'status'
@@ -46,7 +40,7 @@ const TaskListing: FC = () => {
     const [dataFetch, setDataFetch] = useState({data: true})
 
     useEffect(() => {
-        <Loader type="ThreeDots"></Loader>
+        <Loader type="ThreeDots"></Loader> 
         trackPromise(
         axiosInstance.get(`/users/${username}/Task.json`)
         .then(response => {
@@ -68,8 +62,8 @@ const TaskListing: FC = () => {
             console.log(error)
         })
         )
-    },[])
-
+    },[username])
+  
 
     const sortTaskByStatus = () => {
         taskGrp1 = []
@@ -172,12 +166,12 @@ const TaskListing: FC = () => {
             </div>) : (
                 <div>
                     <div className="mt-3 row justify-content-center">
-                        <img className="tick" src={tick}></img>
+                        <img className="tick" src={tick} alt="tick"></img>
                         <h1><b>Task List</b></h1>
                     </div>
                     {dataFetch.data === false ? (
-                        <div id="alert">
-                            <div className="alert-box row mt-5 justify-content-center" >
+                        <div className="alert-box">
+                            <div className="row justify-content-center" >
                                 <h2>No task created!</h2>
                             </div>
                         </div>) : (null)}

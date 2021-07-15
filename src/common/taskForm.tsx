@@ -9,7 +9,7 @@ interface ParentCompProps {
     description: string | undefined;
     type: string | undefined;
     priority: string | undefined;
-    createdDate: Date | undefined;
+    createdDate: string | undefined;
     comments: string | undefined;
     isEnabled: boolean;
     inputData: (e:ChangeEvent<HTMLInputElement>) => void;
@@ -102,7 +102,7 @@ const TaskForm:FC<ParentCompProps> = (
             <textarea className="form-control form-control-lg rounded-2"   name="comments" placeholder="Comments" onChange={textareaData} defaultValue={comments}/>  
             </div>
 
-            <button type="submit" disabled = {!isEnabled} className="btn btn-success btn-lg" id="btnLogin">Submit</button>
+            <button type="submit" disabled = {!isEnabled} className="btn btn-success btn-lg">Submit</button>
         </form>
     );
 }

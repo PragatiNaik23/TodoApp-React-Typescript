@@ -6,7 +6,7 @@ export class Task
     type: string | undefined;
     priority: string | undefined;
     dueDate: Date | undefined;
-    createdDate: Date | undefined;
+    createdDate: string | undefined;
     comments: string | undefined;
     status: string | undefined;
 }

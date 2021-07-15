@@ -1,12 +1,11 @@
-import React, { ChangeEvent, FC, useState } from "react"
+import React, { ChangeEvent, FC, useContext, useState } from "react"
+import TaskForm from "../../common/taskForm";
+import { useHistory } from "react-router-dom";
 import Modal from "react-modal";
-import {createBrowserHistory} from 'history';
 import '../../css/form.scss'
 import axiosInstance from '../../axios';
-import TaskForm from "../../common/taskForm";
+import currentUserContext from "../../utils/context";
 
-
-export const HISTORY = createBrowserHistory({forceRefresh:true});
 
 interface ParentCompProps {
     uId: string | undefined;
@@ -17,13 +16,16 @@ interface ParentCompProps {
     description: string | undefined;
     type: string | undefined;
     priority: string | undefined;
-    createdDate: Date | undefined;
+    createdDate: string | undefined;
     comments: string | undefined;
 }
 
-const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,description, type, priority, createdDate, comments}) => {
+const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,description, type, priority,
+     createdDate, comments}) => {
 
-    let username = window.localStorage.getItem('username')
+    const HISTORY = useHistory()
+    
+    const username = useContext(currentUserContext)?.username  
 
     const [editTask, setEditTask] = useState({
         title,

@@ -5,22 +5,19 @@ import Signup from './components/signup/signup'
 import EditTask from "./components/editTask/editTask";
 import CreateTask from "./components/createTask/createTask";
 import TaskListing from "./components/tasklisting/taskListing";
-import currentUser from "./utils/context";
-
+import Header from "./components/header/header";
 
 
 const AppRouter: FC = () => {
-//    console.log("route",)
     return(
         <Router>
+            <Header></Header>
             <Switch >
-            {/* <currentUser.Provider value={user}> */}
                 <Route path='/' exact component={Login}/>
                 <Route path='/signup' exact component={Signup} />
                 <Route path='/edit' exact component={EditTask}/>
                 <Route path='/create' exact component={CreateTask}/>
                 <Route path='/listing' exact component={TaskListing}/>
-            {/* </currentUser.Provider> */}
             </Switch>
         </Router>
     );

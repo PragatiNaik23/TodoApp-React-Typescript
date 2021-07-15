@@ -1,23 +1,22 @@
-import  { ChangeEvent, FC, useState} from 'react';
+import  {ChangeEvent, FC, useContext, useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import Modal from "react-modal";
-import {createBrowserHistory} from 'history';
 import "../../css/form.scss";
 import axiosInstance from '../../axios';
 import { User } from '../../modalClass/user';
 import React from 'react';
-
-
-export const HISTORY = createBrowserHistory({forceRefresh:true});
-declare let user: string
-
+import currentUserContext from '../../utils/context';
 
 
 let userDetail : Array<User>
+let user: string;
 
 const Login: FC = () => {
-    // const name = React.useContext(currentUser)
-    // console.log(name)
 
+    const history = useHistory()
+
+    let setUserName = useContext(currentUserContext)?.setUserName;
+   
     const [loginData, setLoginData] = useState({
         username: '',
         password: ''
@@ -77,18 +76,18 @@ const Login: FC = () => {
         })
     }
 
+
     const auth = () => {
         for(let details in userDetail){
            if(userDetail[details].password=== loginData.password){
             setPassword({
                 correct: true
             })
-
-            console.log("Go to Task Listing Page");
-            window.localStorage.setItem('username', loginData.username)
             user = loginData.username
-            
-            HISTORY.push('/listing')
+            console.log("Go to Task Listing Page");
+            if(setUserName)
+                setUserName(user)
+            history.push('/listing')  
             }
             else{
                 setPassword({
@@ -97,11 +96,9 @@ const Login: FC = () => {
             }
         }   
     }
-
+  
     return (
         <div>
-
-
             <Modal
             isOpen={isOpen}
             onRequestClose={toggleModal}
@@ -151,3 +148,4 @@ const Login: FC = () => {
 }
 
 export default Login;
+

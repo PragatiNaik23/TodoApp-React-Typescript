@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import Modal from "react-modal";
 import '../../css/card.scss';
 import '../../css/modal.css';
@@ -13,7 +13,7 @@ interface ParentCompProps {
     description: string | undefined;
     type: string | undefined;
     priority: string | undefined;
-    createdDate: Date | undefined;
+    createdDate: string | undefined;
     comments: string | undefined;
 }
 

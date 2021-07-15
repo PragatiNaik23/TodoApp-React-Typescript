@@ -1,17 +1,17 @@
-import  { ChangeEvent, FC, useState} from 'react';
+import  { ChangeEvent, FC,useState} from 'react';
+import { useHistory} from 'react-router-dom';
 import Modal from "react-modal";
-import {createBrowserHistory} from 'history';
 import "../../css/form.scss";
 import axiosInstance from '../../axios';
 import { User } from '../../modalClass/user';
 
 
-export const HISTORY = createBrowserHistory({forceRefresh:true});
-
 let userList: Array<User>
 let usernameList: string[] = []
 
 const Signup: FC = () => {
+
+    const HISTORY = useHistory()
 
     const [formData, setFormData] = useState({
         name: '',
@@ -122,7 +122,7 @@ const Signup: FC = () => {
                         <div className="form-group">
                             <input type="password" className="form-control form-control-lg rounded-2" onChange={updateData} name="password" placeholder="Password" required/>
                         </div>
-                        <button type="submit" className="btn btn-success btn-lg" id="btnLogin">Sign UP</button>
+                        <button type="submit" className="btn btn-success btn-lg">Sign UP</button>
                     </form>
                 </div>
             </div>

@@ -1,26 +1,30 @@
-import React, {ChangeEvent, FC, useState} from 'react'
+import React, {ChangeEvent, FC, useContext, useState} from 'react'
+import { useHistory } from 'react-router-dom';
 import Modal from "react-modal";
-import {createBrowserHistory} from 'history';
 import moment from 'moment';
 import '../../css/form.scss'
 import axiosInstance from '../../axios';
 import { Task } from '../../modalClass/Task';
 import TaskForm from '../../common/taskForm';
 import { useEffect } from 'react';
+import currentUserContext from '../../utils/context';
 
-
-export const HISTORY = createBrowserHistory({forceRefresh:true});
 
 let taskList: Array<Task>
 let idList: number[] = []
 
 const CreateTask: FC = () => {
 
-    let date = new Date()
-    let datestring = ('0' + date.getDate()).slice(-2)  + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + date.getFullYear();
-    let today = moment(datestring).toDate()
+    const HISTORY = useHistory()
+    
+   const username = useContext(currentUserContext)?.username 
 
-    let username = window.localStorage.getItem('username')
+    let date = new Date()
+    let today = ('0' + date.getDate()).slice(-2)  + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + date.getFullYear();
+    // let today = moment(datestring).toDate()
+    // console.log("date", today)
+
+   
 
     useEffect(() => {
         axiosInstance.get(`/users/${username}/Task.json`)
