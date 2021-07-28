@@ -1,5 +1,4 @@
 import { ChangeEvent, FC, useContext, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import {usePromiseTracker, trackPromise} from 'react-promise-tracker';
 import Loader from "react-loader-spinner";
 import tick from '../../images/tick.png';

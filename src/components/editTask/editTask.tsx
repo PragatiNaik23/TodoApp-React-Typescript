@@ -18,10 +18,11 @@ interface ParentCompProps {
     priority: string | undefined;
     createdDate: string | undefined;
     comments: string | undefined;
+    modalFunc: (e:React.SyntheticEvent) => Promise<void> | void;
 }
 
 const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,description, type, priority,
-     createdDate, comments}) => {
+     createdDate, comments, modalFunc}) => {
 
     const HISTORY = useHistory()
     
@@ -64,6 +65,7 @@ const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,descripti
         setIsOpen(!isOpen);
     }
 
+    
     const isEnabled = editTask.title !== '' && 
                       editTask.description !== '' &&
                       editTask.type!== '' &&
@@ -76,6 +78,7 @@ const EditTask:FC<ParentCompProps> = ({uId, id, title, dueDate, status,descripti
         axiosInstance.patch(`/users/${username}/Task/${uId}.json`, editTask)
         .then(response => {
             console.log(response);
+            modalFunc(e)
             HISTORY.replace('/listing')
         })
         .catch(error => {

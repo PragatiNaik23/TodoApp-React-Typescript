@@ -1,7 +1,6 @@
 import React, {ChangeEvent, FC, useContext, useState} from 'react'
 import { useHistory } from 'react-router-dom';
 import Modal from "react-modal";
-import moment from 'moment';
 import '../../css/form.scss'
 import axiosInstance from '../../axios';
 import { Task } from '../../modalClass/Task';
@@ -21,10 +20,6 @@ const CreateTask: FC = () => {
 
     let date = new Date()
     let today = ('0' + date.getDate()).slice(-2)  + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + date.getFullYear();
-    // let today = moment(datestring).toDate()
-    // console.log("date", today)
-
-   
 
     useEffect(() => {
         axiosInstance.get(`/users/${username}/Task.json`)

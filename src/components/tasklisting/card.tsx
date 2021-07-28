@@ -44,10 +44,10 @@ const Card: FC<ParentCompProps> = ({uId, id, title, dueDate, status,description,
         Tclasses = "text-primary"
     }
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [editIsOpen, setEDitIsOpen] = useState(false);
 
-    function toggleModal() {
-        setIsOpen(!isOpen);
+    function editModal(){
+        setEDitIsOpen(!editIsOpen)
     }
 
    return(
@@ -97,10 +97,10 @@ const Card: FC<ParentCompProps> = ({uId, id, title, dueDate, status,description,
                     <div className="row d-flex justify-content-start mt-1">
                         Comments:{comments}
                     </div>
-                    <button className="editbtn btn btn-danger mt-3 col-md-4 text-center center" onClick={toggleModal}>Edit</button>
+                    <button className="editbtn btn btn-danger mt-3 col-md-4 text-center center" onClick={editModal}>Edit</button>
                     <Modal
-                        isOpen={isOpen}
-                        onRequestClose={toggleModal}
+                        isOpen={editIsOpen}
+                        onRequestClose={editModal}
                         contentLabel="My dialog"
                         className="mymodal"
                         overlayClassName="myoverlay"
@@ -117,6 +117,7 @@ const Card: FC<ParentCompProps> = ({uId, id, title, dueDate, status,description,
                         priority = {priority}
                         createdDate = {createdDate}
                         comments = {comments}
+                        modalFunc = {editModal}
                         ></EditTask>
                     </Modal>
                 </div>
